@@ -1,0 +1,9 @@
+target
+*.iml
+.classpath
+.project
+.settings
+.DS_Store
+
+# Project exclude paths
+/node_modules/
