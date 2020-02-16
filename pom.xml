@@ -90,7 +90,7 @@
     <maven-error-prone-plugin.version>2.8.5</maven-error-prone-plugin.version>
     <error-prone.version>2.3.4</error-prone.version>
     <nullaway.version>0.7.5</nullaway.version>
-    <revapi-maven-plugin.version>0.11.2</revapi-maven-plugin.version>
+    <revapi-maven-plugin.version>0.11.3</revapi-maven-plugin.version>
     <revapi-java.version>0.20.0</revapi-java.version>
     <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
     <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
