@@ -7,7 +7,7 @@
   <artifactId>codingstyle-pom</artifactId>
   <version>0.1.0-SNAPSHOT</version>
 
-  <packaging>jar</packaging>
+  <packaging>pom</packaging>
 
   <name>Java coding style POM</name>
   <description>Provides all necessary resources for a Java project to enforce the coding style used in the lecture
@@ -315,19 +315,6 @@
             </manifestEntries>
           </archive>
         </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>test-jar</goal>
-            </goals>
-            <configuration>
-              <includes>
-                <include>**/*Assert*</include>
-                <include>**/Abstract*Test*</include>
-              </includes>
-            </configuration>
-          </execution>
-        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
