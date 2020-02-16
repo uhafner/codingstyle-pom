@@ -279,30 +279,6 @@
         </executions>
       </plugin>
       <plugin>
-        <groupId>org.assertj</groupId>
-        <artifactId>assertj-assertions-generator-maven-plugin</artifactId>
-        <version>${assertj-assertions-generator-maven-plugin.version}</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>generate-assertions</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <cleanTargetDir>true</cleanTargetDir>
-          <hierarchical>false</hierarchical>
-          <generateBddAssertions>false</generateBddAssertions>
-          <generateJUnitSoftAssertions>false</generateJUnitSoftAssertions>
-          <templates>
-            <templatesDirectory>${project.basedir}/etc/templates/</templatesDirectory>
-            <assertionsEntryPointClass>assertions_entry_point_class_template.txt</assertionsEntryPointClass>
-            <softEntryPointAssertionClass>soft_assertions_entry_point_class_template.txt</softEntryPointAssertionClass>
-          </templates>
-          <skip>true</skip>  <!-- Should be set to false in the derived POM -->
-        </configuration>
-      </plugin>
-      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
         <version>${maven-jar-plugin.version}</version>

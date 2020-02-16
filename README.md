@@ -17,7 +17,6 @@ get the configuration of the following tools for free:
 - [Find Security Bugs](https://find-sec-bugs.github.io)
 - [Error Prone](https://errorprone.info)
 - [NullAway](https://github.com/uber/NullAway)
-- [AssertJ Custom Assertions Generator](https://joel-costigliola.github.io/assertj/assertj-assertions-generator.html)
 - [JaCoCo Code Coverage](https://www.jacoco.org/jacoco/index.html)
 - [ArchUnit Architecture Tests](https://www.archunit.org) 
 - [RevAPI API Checker](https://revapi.org)
