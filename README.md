@@ -7,7 +7,7 @@ formatting rules, design principles, code patterns, idioms, etc. I published suc
 [GitHub project 'codingstyle'](https://github.com/uhafner/codingstyle). I am using this coding style in my lectures about 
 software development at Munich University of Applied Sciences and in all of my open source projects.  
 
-If you want to use this coding style as well you can use this [Maven POM](pom.xml) as parent of you own pom. Then you
+If you want to use this coding style as well you can use this [Maven POM](pom.xml) as parent of you own POM. Then you
 get the configuration of the following tools for free:
 - [Java Compiler](https://openjdk.java.net/groups/compiler/)
 - [JavaDoc Tool](https://www.oracle.com/technetwork/java/javase/documentation/javadoc-137458.html)

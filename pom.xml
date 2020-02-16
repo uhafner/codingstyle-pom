@@ -4,8 +4,8 @@
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>edu.hm.hafner</groupId>
-  <artifactId>codingstyle</artifactId>
-  <version>0.4.5-SNAPSHOT</version>
+  <artifactId>codingstyle-pom</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
 
   <packaging>jar</packaging>
 
@@ -54,10 +54,10 @@
 
     <module.name>${project.groupId}.codingstyle</module.name>
 
+    <codingstyle.config.version>0.4.5</codingstyle.config.version>
+
     <!-- Project Dependencies Configuration -->
     <spotbugs.annotations>3.1.12</spotbugs.annotations>
-    <commons.lang.version>3.9</commons.lang.version>
-    <commons.io.version>2.6</commons.io.version>
 
     <!-- Project Test Dependencies Configuration -->
     <junit.version>5.6.0</junit.version>
@@ -85,7 +85,6 @@
     <spotbugs-maven-plugin.version>3.1.12.2</spotbugs-maven-plugin.version>
     <findsecbugs-plugin.version>1.10.1</findsecbugs-plugin.version>
     <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
-    <maven-taglist-plugin.version>2.4</maven-taglist-plugin.version>
     <maven-pitest-plugin.version>1.4.11</maven-pitest-plugin.version>
     <pitest-junit5-plugin.version>0.12</pitest-junit5-plugin.version>
     <maven-error-prone-plugin.version>2.8.5</maven-error-prone-plugin.version>
@@ -96,6 +95,7 @@
     <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
     <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
     <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
+    <assertj-assertions-generator-maven-plugin.version>2.2.0</assertj-assertions-generator-maven-plugin.version>
 
     <!-- Maven Surefire ArgLine -->
     <argLine>-Djava.util.logging.config.file=logging.properties</argLine>
@@ -112,16 +112,6 @@
       <groupId>com.google.errorprone</groupId>
       <artifactId>error_prone_annotations</artifactId>
       <version>${error-prone.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-lang3</artifactId>
-      <version>${commons.lang.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>commons-io</groupId>
-      <artifactId>commons-io</artifactId>
-      <version>${commons.io.version}</version>
     </dependency>
 
     <!-- Test Dependencies -->
@@ -182,17 +172,6 @@
   </dependencies>
 
   <build>
-    <resources>
-      <resource>
-        <directory>etc</directory>
-        <filtering>true</filtering>
-      </resource>
-      <resource>
-        <directory>src/main/resources</directory>
-        <filtering>false</filtering>
-      </resource>
-    </resources>
-
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -235,11 +214,13 @@
             <arg>-Xlint:all</arg>
             <arg>-XepAllDisabledChecksAsWarnings</arg>
             <arg>-XepIgnoreUnknownCheckNames</arg>
+            <arg>-XepDisableWarningsInGeneratedCode</arg>
             <arg>-XepAllErrorsAsWarnings</arg>
             <!-- NullAway configuration -->
             <arg>-Xep:NullAway:WARN</arg>
             <arg>-XepOpt:NullAway:AnnotatedPackages=edu.hm.hafner</arg>
             <!-- Disabled Rules -->
+            <arg>-Xep:PreferJavaTimeOverload:OFF</arg>
             <arg>-Xep:EqualsGetClass:OFF</arg>
             <arg>-Xep:AndroidJdkLibsChecker:OFF</arg>
             <arg>-Xep:Java7ApiChecker:OFF</arg>
@@ -271,7 +252,9 @@
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>${maven-javadoc-plugin.version}</version>
         <configuration>
+          <source>${java.version}</source>
           <additionalOptions>-Xdoclint:all</additionalOptions>
+          <quiet>true</quiet>
         </configuration>
         <executions>
           <execution>
@@ -296,6 +279,30 @@
         </executions>
       </plugin>
       <plugin>
+        <groupId>org.assertj</groupId>
+        <artifactId>assertj-assertions-generator-maven-plugin</artifactId>
+        <version>${assertj-assertions-generator-maven-plugin.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>generate-assertions</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <cleanTargetDir>true</cleanTargetDir>
+          <hierarchical>false</hierarchical>
+          <generateBddAssertions>false</generateBddAssertions>
+          <generateJUnitSoftAssertions>false</generateJUnitSoftAssertions>
+          <templates>
+            <templatesDirectory>${project.basedir}/etc/templates/</templatesDirectory>
+            <assertionsEntryPointClass>assertions_entry_point_class_template.txt</assertionsEntryPointClass>
+            <softEntryPointAssertionClass>soft_assertions_entry_point_class_template.txt</softEntryPointAssertionClass>
+          </templates>
+          <skip>true</skip>  <!-- Should be set to false in the derived POM -->
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
         <version>${maven-jar-plugin.version}</version>
@@ -315,25 +322,8 @@
             </goals>
             <configuration>
               <includes>
-                <include>**/assertj/*</include>
-                <include>**/ResourceTest*</include>
-                <include>**/SerializableTest*</include>
-                <include>**/ArchitectureRules*</include>
-              </includes>
-            </configuration>
-          </execution>
-          <execution>
-            <phase>package</phase>
-            <id>config</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-            <configuration>
-              <classifier>config</classifier>
-              <includes>
-                <include>**/checkstyle-configuration.xml</include>
-                <include>**/pmd-configuration.xml</include>
-                <include>**/spotbugs-exclusion-filter.xml</include>
+                <include>**/*Assert*</include>
+                <include>**/Abstract*Test*</include>
               </includes>
             </configuration>
           </execution>
@@ -356,11 +346,14 @@
         <configuration>
           <failOnViolation>false</failOnViolation>
           <rulesets>
-            <ruleset>etc/pmd-configuration.xml</ruleset>
+            <ruleset>pmd-configuration.xml</ruleset>
           </rulesets>
           <targetJdk>${java.version}</targetJdk>
           <includeTests>true</includeTests>
           <minimumTokens>50</minimumTokens>
+          <excludeRoots>
+            <excludeRoot>target/generated-test-sources/assertj-assertions</excludeRoot>
+          </excludeRoots>
         </configuration>
         <dependencies>
           <dependency>
@@ -372,6 +365,12 @@
             <groupId>net.sourceforge.pmd</groupId>
             <artifactId>pmd-java</artifactId>
             <version>${pmd.version}</version>
+          </dependency>
+          <dependency>
+            <groupId>edu.hm.hafner</groupId>
+            <artifactId>codingstyle</artifactId>
+            <version>${codingstyle.config.version}</version>
+            <classifier>config</classifier>
           </dependency>
         </dependencies>
       </plugin>
@@ -389,9 +388,9 @@
           </execution>
         </executions>
         <configuration>
-          <excludes>**/MavenJavaTest.txt.java</excludes>
+          <excludes>**/*Assert*.java</excludes>
           <failOnViolation>false</failOnViolation>
-          <configLocation>etc/checkstyle-configuration.xml</configLocation>
+          <configLocation>checkstyle-configuration.xml</configLocation>
           <includeTestSourceDirectory>true</includeTestSourceDirectory>
         </configuration>
         <dependencies>
@@ -399,6 +398,12 @@
             <groupId>com.puppycrawl.tools</groupId>
             <artifactId>checkstyle</artifactId>
             <version>${checkstyle.version}</version>
+          </dependency>
+          <dependency>
+            <groupId>edu.hm.hafner</groupId>
+            <artifactId>codingstyle</artifactId>
+            <version>${codingstyle.config.version}</version>
+            <classifier>config</classifier>
           </dependency>
         </dependencies>
       </plugin>
@@ -422,7 +427,7 @@
           <effort>Max</effort>
           <relaxed>false</relaxed>
           <fork>true</fork>
-          <excludeFilterFile>etc/spotbugs-exclusion-filter.xml</excludeFilterFile>
+          <excludeFilterFile>spotbugs-exclusion-filter.xml</excludeFilterFile>
           <includeTests>true</includeTests>
           <plugins>
             <plugin>
@@ -432,6 +437,14 @@
             </plugin>
           </plugins>
         </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>edu.hm.hafner</groupId>
+            <artifactId>codingstyle</artifactId>
+            <version>${codingstyle.config.version}</version>
+            <classifier>config</classifier>
+          </dependency>
+        </dependencies>
       </plugin>
       <plugin>
         <groupId>org.revapi</groupId>
@@ -450,6 +463,7 @@
               <enabled>true</enabled>
             </revapi.semver.ignore>
           </analysisConfiguration>
+          <skip>true</skip>  <!-- Should be set to false in the derived POM -->
         </configuration>
         <executions>
           <execution>
@@ -509,11 +523,6 @@
           <groupId>org.jacoco</groupId>
           <artifactId>jacoco-maven-plugin</artifactId>
           <version>${jacoco-maven-plugin.version}</version>
-          <configuration>
-            <excludes>
-              <exclude>**/FastRegexpLineParser.*</exclude>
-            </excludes>
-          </configuration>
           <executions>
             <execution>
               <goals>
