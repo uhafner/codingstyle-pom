@@ -1,5 +1,5 @@
-tag-template: codingstyle-$NEXT_PATCH_VERSION
-name-template: Codingstyle $NEXT_PATCH_VERSION 🎁
+tag-template: codingstyle-pom-$NEXT_PATCH_VERSION
+name-template: Codingstyle POM $NEXT_PATCH_VERSION 🎁
 
 version-template: $MAJOR.$MINOR.$PATCH
 
