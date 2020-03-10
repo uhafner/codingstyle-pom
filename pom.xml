@@ -412,35 +412,6 @@
           </dependency>
         </dependencies>
       </plugin>
-      <plugin>
-        <groupId>org.revapi</groupId>
-        <artifactId>revapi-maven-plugin</artifactId>
-        <version>${revapi-maven-plugin.version}</version>
-        <dependencies>
-          <dependency>
-            <groupId>org.revapi</groupId>
-            <artifactId>revapi-java</artifactId>
-            <version>${revapi-java.version}</version>
-          </dependency>
-        </dependencies>
-        <configuration>
-          <analysisConfiguration>
-            <revapi.semver.ignore>
-              <enabled>true</enabled>
-            </revapi.semver.ignore>
-          </analysisConfiguration>
-          <skip>true</skip>  <!-- Should be set to false in the derived POM -->
-        </configuration>
-        <executions>
-          <execution>
-            <id>run-revapi</id>
-            <goals>
-              <goal>check</goal>
-            </goals>
-            <phase>verify</phase>
-          </execution>
-        </executions>
-      </plugin>
     </plugins>
 
     <pluginManagement>
@@ -518,6 +489,34 @@
           <configuration>
             <outputFormats>XML,HTML</outputFormats>
           </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.revapi</groupId>
+          <artifactId>revapi-maven-plugin</artifactId>
+          <version>${revapi-maven-plugin.version}</version>
+          <dependencies>
+            <dependency>
+              <groupId>org.revapi</groupId>
+              <artifactId>revapi-java</artifactId>
+              <version>${revapi-java.version}</version>
+            </dependency>
+          </dependencies>
+          <configuration>
+            <analysisConfiguration>
+              <revapi.semver.ignore>
+                <enabled>true</enabled>
+              </revapi.semver.ignore>
+            </analysisConfiguration>
+          </configuration>
+          <executions>
+            <execution>
+              <id>run-revapi</id>
+              <goals>
+                <goal>check</goal>
+              </goals>
+              <phase>verify</phase>
+            </execution>
+          </executions>
         </plugin>
         <plugin>
           <artifactId>maven-enforcer-plugin</artifactId>
