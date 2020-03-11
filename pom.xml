@@ -539,6 +539,38 @@
             </execution>
           </executions>
         </plugin>
+        <plugin>
+          <groupId>org.assertj</groupId>
+          <artifactId>assertj-assertions-generator-maven-plugin</artifactId>
+          <version>${assertj-assertions-generator-maven-plugin.version}</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>generate-assertions</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <cleanTargetDir>true</cleanTargetDir>
+            <hierarchical>false</hierarchical>
+            <generateBddAssertions>false</generateBddAssertions>
+            <generateJUnitSoftAssertions>false</generateJUnitSoftAssertions>
+            <generateSoftAssertions>true</generateSoftAssertions>
+            <templates>
+              <templatesDirectory>${project.basedir}/etc/assertj-templates/</templatesDirectory>
+              <assertionsEntryPointClass>assertions_entry_point_class_template.txt</assertionsEntryPointClass>
+              <softEntryPointAssertionClass>soft_assertions_entry_point_class_template.txt</softEntryPointAssertionClass>
+            </templates>
+          </configuration>
+          <dependencies>
+            <!-- Without this dependency mvn test will fail due to a class not found exception -->
+            <dependency>
+              <groupId>junit</groupId>
+              <artifactId>junit</artifactId>
+              <version>4.13</version>
+            </dependency>
+          </dependencies>
+        </plugin>
       </plugins>
     </pluginManagement>
   </build>
