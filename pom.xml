@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>edu.hm.hafner</groupId>
@@ -13,7 +14,8 @@
   <description>
     Each Java project should follow a given coding style. I.e., all contributions to the source code should use the same
     formatting rules, design principles, code patterns, idioms, etc. I published such a coding style in my
-    GitHub project codingstyle (https://github.com/uhafner/codingstyle) - I am using this coding style in my lectures about
+    GitHub project codingstyle (https://github.com/uhafner/codingstyle) - I am using this coding style in my lectures
+    about
     software development at Munich University of Applied Sciences and in all of my open source projects.
 
     If you want to use this coding style as well you can use this Maven POM as parent of you own POM. Then you
@@ -99,6 +101,8 @@
     <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
     <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
     <assertj-assertions-generator-maven-plugin.version>2.2.0</assertj-assertions-generator-maven-plugin.version>
+    <maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version>
+    <maven-dependency-plugin.version>3.1.2</maven-dependency-plugin.version>
 
     <!-- Maven Surefire ArgLine -->
     <argLine>-Djava.util.logging.config.file=logging.properties</argLine>
@@ -459,6 +463,16 @@
           <version>${maven-deploy-plugin.version}</version>
         </plugin>
         <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>${maven-enforcer-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>${maven-dependency-plugin.version}</version>
+        </plugin>
+        <plugin>
           <groupId>org.jacoco</groupId>
           <artifactId>jacoco-maven-plugin</artifactId>
           <version>${jacoco-maven-plugin.version}</version>
@@ -504,6 +518,7 @@
             </dependency>
           </dependencies>
           <configuration>
+            <failBuildOnProblemsFound>true</failBuildOnProblemsFound>
             <analysisConfiguration>
               <revapi.semver.ignore>
                 <enabled>true</enabled>
@@ -560,7 +575,8 @@
             <templates>
               <templatesDirectory>${project.basedir}/etc/assertj-templates/</templatesDirectory>
               <assertionsEntryPointClass>assertions_entry_point_class_template.txt</assertionsEntryPointClass>
-              <softEntryPointAssertionClass>soft_assertions_entry_point_class_template.txt</softEntryPointAssertionClass>
+              <softEntryPointAssertionClass>soft_assertions_entry_point_class_template.txt
+              </softEntryPointAssertionClass>
             </templates>
           </configuration>
           <dependencies>
