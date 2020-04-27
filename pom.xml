@@ -513,6 +513,11 @@
           </dependencies>
           <configuration>
             <outputFormats>XML,HTML</outputFormats>
+            <excludedMethods>
+              <param>*equals</param>
+              <param>*hashCode</param>
+              <param>*toString</param>
+            </excludedMethods>
           </configuration>
         </plugin>
         <plugin>
