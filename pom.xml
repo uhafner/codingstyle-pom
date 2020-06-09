@@ -101,6 +101,7 @@
     <assertj-assertions-generator-maven-plugin.version>2.2.0</assertj-assertions-generator-maven-plugin.version>
     <maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version>
     <maven-dependency-plugin.version>3.1.2</maven-dependency-plugin.version>
+    <depgraph-maven-plugin.version>3.3.0</depgraph-maven-plugin.version>
 
     <!-- Maven Surefire ArgLine -->
     <argLine>-Djava.util.logging.config.file=logging.properties</argLine>
@@ -436,6 +437,20 @@
 
     <pluginManagement>
       <plugins>
+        <plugin>
+          <groupId>com.github.ferstl</groupId>
+          <artifactId>depgraph-maven-plugin</artifactId>
+          <version>${depgraph-maven-plugin.version}</version>
+          <configuration>
+            <graphFormat>puml</graphFormat>
+            <scope>compile</scope>
+            <type>hpi</type>
+            <showClassifiers>true</showClassifiers>
+            <showVersions>true</showVersions>
+            <showConflicts>true</showConflicts>
+            <showDuplicates>true</showDuplicates>
+          </configuration>
+        </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
