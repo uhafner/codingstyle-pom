@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>edu.hm.hafner</groupId>
   <artifactId>codingstyle-pom</artifactId>
-  <version>1.3.0</version>
+  <version>1.3.1-SNAPSHOT</version>
 
   <packaging>pom</packaging>
 
@@ -24,7 +24,7 @@
     <connection>scm:git:git://github.com/uhafner/codingstyle-pom.git</connection>
     <developerConnection>scm:git:git@github.com:uhafner/codingstyle-pom.git</developerConnection>
     <url>https://github.com/uhafner/codingstyle-pom</url>
-    <tag>codingstyle-pom-1.3.0</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <licenses>
