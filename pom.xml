@@ -346,6 +346,7 @@
           <includeTests>true</includeTests>
           <minimumTokens>50</minimumTokens>
           <excludeRoots>
+            <excludeRoot>target/generated-test-sources/test-annotations</excludeRoot>
             <excludeRoot>target/generated-test-sources/assertj-assertions</excludeRoot>
           </excludeRoots>
         </configuration>
@@ -383,7 +384,7 @@
         </executions>
         <configuration>
           <linkXRef>false</linkXRef>
-          <excludes>**/*Assert*.java</excludes>
+          <excludes>**/*Assert*.java,**/*_jmh*</excludes>
           <failOnViolation>false</failOnViolation>
           <configLocation>checkstyle-configuration.xml</configLocation>
           <includeTestSourceDirectory>true</includeTestSourceDirectory>
