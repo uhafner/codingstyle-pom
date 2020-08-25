@@ -247,6 +247,7 @@
             <arg>-Xep:NullAway:WARN</arg>
             <arg>-XepOpt:NullAway:AnnotatedPackages=edu.hm.hafner</arg>
             <!-- Disabled Rules -->
+            <arg>-Xep:ReturnMissingNullable:OFF</arg>
             <arg>-Xep:PreferJavaTimeOverload:OFF</arg>
             <arg>-Xep:EqualsGetClass:OFF</arg>
             <arg>-Xep:AndroidJdkLibsChecker:OFF</arg>
@@ -608,8 +609,8 @@
             <templates>
               <templatesDirectory>${project.basedir}/etc/assertj-templates/</templatesDirectory>
               <assertionsEntryPointClass>assertions_entry_point_class_template.txt</assertionsEntryPointClass>
-              <softEntryPointAssertionClass>soft_assertions_entry_point_class_template.txt
-              </softEntryPointAssertionClass>
+              <softEntryPointAssertionClass>soft_assertions_entry_point_class_template.txt</softEntryPointAssertionClass>
+              <objectAssertion>has_assertion_template.txt</objectAssertion>
             </templates>
           </configuration>
           <dependencies>
