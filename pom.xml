@@ -239,6 +239,7 @@
           </annotationProcessorPaths>
           <compilerArgs>
             <arg>-Xlint:all</arg>
+            <arg>-XepExcludedPaths:.*/generated-test-sources/.*</arg>
             <arg>-XepAllDisabledChecksAsWarnings</arg>
             <arg>-XepIgnoreUnknownCheckNames</arg>
             <arg>-XepDisableWarningsInGeneratedCode</arg>
