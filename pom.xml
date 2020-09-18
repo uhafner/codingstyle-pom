@@ -63,7 +63,7 @@
     <spotbugs.annotations>4.1.2</spotbugs.annotations>
 
     <!-- Project Test Dependencies Configuration -->
-    <junit.version>5.6.2</junit.version>
+    <junit.version>5.7.0</junit.version>
     <junit-platform-launcher.version>1.7.0</junit-platform-launcher.version>
     <mockito.version>3.5.10</mockito.version>
     <assertj.version>3.17.2</assertj.version>
