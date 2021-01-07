@@ -89,8 +89,8 @@
     <jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
     <maven-pitest-plugin.version>1.6.2</maven-pitest-plugin.version>
     <pitest-junit5-plugin.version>0.12</pitest-junit5-plugin.version>
-    <maven-error-prone-plugin.version>2.8.6</maven-error-prone-plugin.version>
     <error-prone.version>2.4.0</error-prone.version>
+    <error-prone.javac.version>9+181-r4173-1</error-prone.javac.version>
     <nullaway.version>0.8.0</nullaway.version>
     <revapi-maven-plugin.version>0.12.2</revapi-maven-plugin.version>
     <revapi-java.version>0.22.1</revapi-java.version>
@@ -238,39 +238,66 @@
             </path>
           </annotationProcessorPaths>
           <compilerArgs>
+            <arg>
+              -J-Xbootclasspath/p:${settings.localRepository}/com/google/errorprone/javac/${error-prone.javac.version}/javac-${error-prone.javac.version}.jar
+            </arg>
             <arg>-Xlint:all</arg>
-            <arg>-XepExcludedPaths:.*/generated-test-sources/.*</arg>
-            <arg>-XepAllDisabledChecksAsWarnings</arg>
-            <arg>-XepIgnoreUnknownCheckNames</arg>
-            <arg>-XepDisableWarningsInGeneratedCode</arg>
-            <arg>-XepAllErrorsAsWarnings</arg>
-            <!-- NullAway configuration -->
-            <arg>-Xep:NullAway:WARN</arg>
-            <arg>-XepOpt:NullAway:AnnotatedPackages=edu.hm.hafner</arg>
-            <!-- Disabled Rules -->
-            <arg>-Xep:ReturnMissingNullable:OFF</arg>
-            <arg>-Xep:PreferJavaTimeOverload:OFF</arg>
-            <arg>-Xep:EqualsGetClass:OFF</arg>
-            <arg>-Xep:AndroidJdkLibsChecker:OFF</arg>
-            <arg>-Xep:Java7ApiChecker:OFF</arg>
-            <arg>-Xep:Var:OFF</arg>
-            <arg>-Xep:PrivateConstructorForUtilityClass:OFF</arg>
-            <arg>-Xep:MethodCanBeStatic:OFF</arg>
-            <arg>-Xep:WildcardImport:OFF</arg>
-            <arg>-Xep:ThrowsUncheckedException:OFF</arg>
-            <arg>-Xep:NullableDereference:OFF</arg> <!-- Exception -->
+            <!-- XXX: The awkward comment formatting used
+            here ensures that the plugin arguments are
+            separated only by spaces. Once we drop support
+            for JDK 8 we can clean this up; later versions
+            do properly handle newline separators. See
+            https://github.com/google/error-prone/pull/1115.
+            -->
+            <arg>-Xplugin:ErrorProne <!--
+                ErrorProne configuration:
+                --> -XepExcludedPaths:.*/generated-test-sources/.* <!--
+                ErrorProne configuration:
+                --> -XepAllDisabledChecksAsWarnings <!--
+                ErrorProne configuration:
+                --> -XepIgnoreUnknownCheckNames <!--
+                ErrorProne configuration:
+                --> -XepDisableWarningsInGeneratedCode <!--
+                ErrorProne configuration:
+                --> -XepAllErrorsAsWarnings <!--
+                NullAway configuration:
+                --> -Xep:NullAway:WARN <!--
+                NullAway configuration:
+                --> -XepOpt:NullAway:AnnotatedPackages=edu.hm.hafner <!--
+                Disabled ErrorProne rule:
+                --> -Xep:ReturnMissingNullable:OFF <!--
+                Disabled ErrorProne rule:
+                --> -Xep:PreferJavaTimeOverload:OFF <!--
+                Disabled ErrorProne rule:
+                --> -Xep:EqualsGetClass:OFF <!--
+                Disabled ErrorProne rule:
+                --> -Xep:AndroidJdkLibsChecker:OFF <!--
+                Disabled ErrorProne rule:
+                --> -Xep:Java7ApiChecker:OFF <!--
+                Disabled ErrorProne rule:
+                --> -Xep:Var:OFF <!--
+                Disabled ErrorProne rule:
+                --> -Xep:PrivateConstructorForUtilityClass:OFF <!--
+                Disabled ErrorProne rule:
+                --> -Xep:MethodCanBeStatic:OFF <!--
+                Disabled ErrorProne rule:
+                --> -Xep:WildcardImport:OFF <!--
+                Disabled ErrorProne rule:
+                --> -Xep:ThrowsUncheckedException:OFF <!--
+                Disabled ErrorProne rule:
+                --> -Xep:NullableDereference:OFF
+            </arg>
+            <!-- The Error Prone plugin makes certain
+                assumptions about the state of the AST at the
+                moment it is invoked. Those assumptions are met
+                when using the `simple` compile policy. This
+                flag may be dropped after resolution of
+                https://bugs.openjdk.java.net/browse/JDK-8155674. -->
+            <arg>-XDcompilePolicy=simple</arg>
           </compilerArgs>
-          <compilerId>javac-with-errorprone</compilerId>
-          <forceJavacCompilerUse>true</forceJavacCompilerUse>
+          <fork>true</fork>
           <showWarnings>true</showWarnings>
         </configuration>
-        <dependencies>
-          <dependency>
-            <groupId>org.codehaus.plexus</groupId>
-            <artifactId>plexus-compiler-javac-errorprone</artifactId>
-            <version>${maven-error-prone-plugin.version}</version>
-          </dependency>
-        </dependencies>
       </plugin>
       <plugin>
         <artifactId>maven-javadoc-plugin</artifactId>
@@ -487,7 +514,6 @@
           <configuration>
             <graphFormat>puml</graphFormat>
             <scope>compile</scope>
-            <type>hpi</type>
             <showClassifiers>true</showClassifiers>
             <showVersions>true</showVersions>
             <showConflicts>true</showConflicts>
