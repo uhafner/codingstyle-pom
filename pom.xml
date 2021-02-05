@@ -60,7 +60,7 @@
     <codingstyle.config.version>1.6.0</codingstyle.config.version>
 
     <!-- Project Dependencies Configuration -->
-    <spotbugs.annotations>4.2.0</spotbugs.annotations>
+    <spotbugs.annotations>4.2.1</spotbugs.annotations>
 
     <!-- Project Test Dependencies Configuration -->
     <junit.version>5.7.0</junit.version>
