@@ -616,10 +616,22 @@
           </dependencies>
           <configuration>
             <failBuildOnProblemsFound>true</failBuildOnProblemsFound>
+            <versionFormat>[0-9.]*</versionFormat>
             <analysisConfiguration>
               <revapi.semver.ignore>
                 <enabled>true</enabled>
               </revapi.semver.ignore>
+              <revapi.differences>
+                <justification>SpotBugs annotations are save to change</justification>
+                <criticality>allowed</criticality>
+                <differences>
+                  <item>
+                    <regex>true</regex>
+                    <code>java.annotation.*</code>
+                    <annotationType>edu.umd.cs.findbugs.annotations.*</annotationType>
+                  </item>
+                </differences>
+              </revapi.differences>
             </analysisConfiguration>
           </configuration>
           <executions>
