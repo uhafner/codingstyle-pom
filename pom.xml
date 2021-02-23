@@ -57,7 +57,7 @@
 
     <module.name>${project.groupId}.codingstyle</module.name>
 
-    <codingstyle.config.version>2.0.5</codingstyle.config.version>
+    <codingstyle.config.version>2.0.6</codingstyle.config.version>
 
     <!-- Project Dependencies Configuration -->
     <spotbugs.annotations>4.2.1</spotbugs.annotations>
