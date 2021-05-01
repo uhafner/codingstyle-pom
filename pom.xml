@@ -335,6 +335,8 @@
                 --> -Xep:BooleanParameter:OFF <!--
                 Disabled ErrorProne rule:
                 --> -Xep:NullableDereference:OFF
+                Disabled ErrorProne rule:
+                --> -Xep:ImmutableMemberCollection:OFF
             </arg>
             <!-- The Error Prone plugin makes certain
                 assumptions about the state of the AST at the
