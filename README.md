@@ -1,4 +1,3 @@
-[![ChangeLog](https://img.shields.io/github/release/uhafner/codingstyle-pom.svg?label=changelog)](https://github.com/uhafner/codingstyle-pom/releases/latest)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/edu.hm.hafner/codingstyle-pom/badge.svg)](https://maven-badges.herokuapp.com/maven-central/edu.hm.hafner/codingstyle-pom)
 [![GitHub Actions](https://github.com/uhafner/codingstyle-pom/workflows/GitHub%20CI/badge.svg?branch=master)](https://github.com/uhafner/codingstyle-pom/actions)
 [![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
