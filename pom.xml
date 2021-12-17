@@ -64,7 +64,7 @@
     <spotbugs.version>4.5.1</spotbugs.version>
 
     <!-- Project Test Dependencies Configuration -->
-    <equalsverifier.version>3.8</equalsverifier.version>
+    <equalsverifier.version>3.8.1</equalsverifier.version>
     <junit.version>5.8.2</junit.version>
     <junit-platform-launcher.version>1.8.2</junit-platform-launcher.version>
     <mockito.version>4.2.0</mockito.version>
