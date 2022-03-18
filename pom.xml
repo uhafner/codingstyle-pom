@@ -54,6 +54,7 @@
     <source.encoding>UTF-8</source.encoding>
     <project.build.sourceEncoding>${source.encoding}</project.build.sourceEncoding>
     <java.version>1.8</java.version>
+    <module.name>codingstyle-pom</module.name>
 
     <codingstyle.config.version>2.16.0</codingstyle.config.version>
 
@@ -62,12 +63,12 @@
     <spotbugs.version>4.6.0</spotbugs.version>
 
     <!-- Project Test Dependencies Configuration -->
-    <equalsverifier.version>3.9</equalsverifier.version>
     <junit.version>5.8.2</junit.version>
-    <junit-platform-launcher.version>1.8.2</junit-platform-launcher.version>
+    <junit-pioneer.version>0.3.0</junit-pioneer.version>
     <mockito.version>4.4.0</mockito.version>
     <assertj.version>3.22.0</assertj.version>
     <archunit.version>0.23.1</archunit.version>
+    <equalsverifier.version>3.9</equalsverifier.version>
 
     <!-- Maven Plug-ins Configuration -->
     <maven-deploy-plugin.version>3.0.0-M2</maven-deploy-plugin.version>
@@ -110,6 +111,13 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>${junit.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
         <groupId>com.uber.nullaway</groupId>
         <artifactId>nullaway</artifactId>
         <version>${nullaway.version}</version>
@@ -121,7 +129,6 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
 
   <dependencies>
     <dependency>
@@ -139,36 +146,38 @@
       <artifactId>error_prone_annotations</artifactId>
       <version>${error-prone.version}</version>
     </dependency>
-
-    <!-- Test Dependencies -->
     <dependency>
       <groupId>nl.jqno.equalsverifier</groupId>
       <artifactId>equalsverifier</artifactId>
       <version>${equalsverifier.version}</version>
       <scope>test</scope>
     </dependency>
+
+    <!-- Test Dependencies -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
-      <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
-      <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.platform</groupId>
       <artifactId>junit-platform-launcher</artifactId>
-      <version>${junit-platform-launcher.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-params</artifactId>
-      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit-pioneer</groupId>
+      <artifactId>junit-pioneer</artifactId>
+      <version>${junit-pioneer.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -187,6 +196,12 @@
       <groupId>com.tngtech.archunit</groupId>
       <artifactId>archunit-junit5</artifactId>
       <version>${archunit.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>nl.jqno.equalsverifier</groupId>
+      <artifactId>equalsverifier</artifactId>
+      <version>${equalsverifier.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -681,7 +696,29 @@
                 </rules>
               </configuration>
             </execution>
+            <execution>
+              <id>enforce-require-property-diverges</id>
+              <goals>
+                <goal>enforce</goal>
+              </goals>
+              <configuration>
+                <rules>
+                  <requirePropertyDiverges>
+                    <property>module.name</property>
+                    <regex>codingstyle-pom</regex>
+                  </requirePropertyDiverges>
+                </rules>
+                <fail>true</fail>
+              </configuration>
+            </execution>
           </executions>
+          <dependencies>
+            <dependency>
+              <groupId>org.codehaus.mojo</groupId>
+              <artifactId>extra-enforcer-rules</artifactId>
+              <version>1.5.1</version>
+            </dependency>
+          </dependencies>
         </plugin>
         <plugin>
           <groupId>org.assertj</groupId>
