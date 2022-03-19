@@ -71,6 +71,7 @@
     <mockito.version>4.4.0</mockito.version>
     <assertj.version>3.22.0</assertj.version>
     <archunit.version>0.23.1</archunit.version>
+    <slf4j-simple.version>1.7.30</slf4j-simple.version>
     <equalsverifier.version>3.9</equalsverifier.version>
 
     <!-- Maven Plug-ins Configuration -->
@@ -108,7 +109,6 @@
 
     <!-- Maven Surefire ArgLine -->
     <argLine>-Djava.util.logging.config.file=logging.properties</argLine>
-
   </properties>
 
   <dependencyManagement>
@@ -211,6 +211,12 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>${slf4j-simple.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>nl.jqno.equalsverifier</groupId>
       <artifactId>equalsverifier</artifactId>
       <version>${equalsverifier.version}</version>
@@ -305,7 +311,6 @@
             </path>
           </annotationProcessorPaths>
           <compilerArgs>
-            <arg>-Xlint:all</arg>
             <arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED</arg>
             <arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED</arg>
             <arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED</arg>
