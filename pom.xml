@@ -222,6 +222,13 @@
       <version>${equalsverifier.version}</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>edu.hm.hafner</groupId>
+      <artifactId>codingstyle</artifactId>
+      <version>${codingstyle.library.version}</version>
+      <scope>test</scope>
+      <type>test-jar</type>
+    </dependency>
   </dependencies>
 
   <build>
