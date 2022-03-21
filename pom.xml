@@ -71,7 +71,7 @@
     <mockito.version>4.4.0</mockito.version>
     <assertj.version>3.22.0</assertj.version>
     <archunit.version>0.23.1</archunit.version>
-    <slf4j-simple.version>1.7.30</slf4j-simple.version>
+    <slf4j-simple.version>1.7.36</slf4j-simple.version>
     <equalsverifier.version>3.9.1</equalsverifier.version>
 
     <!-- Maven Plug-ins Configuration -->
