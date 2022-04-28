@@ -98,6 +98,7 @@
     <nullaway.version>0.9.6</nullaway.version>
     <revapi-maven-plugin.version>0.14.6</revapi-maven-plugin.version>
     <revapi-java.version>0.26.1</revapi-java.version>
+    <revapi-reporter-json-version>0.4.5</revapi-reporter-json-version>
     <nexus-staging-maven-plugin.version>1.6.12</nexus-staging-maven-plugin.version>
     <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
     <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
@@ -134,6 +135,17 @@
         <groupId>net.bytebuddy</groupId>
         <artifactId>byte-buddy</artifactId>
         <version>1.12.9</version>
+      </dependency>
+      <!-- Not everything needs revApi or the reporter -->
+      <dependency>
+        <groupId>org.revapi</groupId>
+        <artifactId>revapi-java</artifactId>
+        <version>${revapi-java.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.revapi</groupId>
+        <artifactId>revapi-reporter-json</artifactId>
+        <version>${revapi-reporter-json-version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -675,14 +687,27 @@
               <artifactId>revapi-java</artifactId>
               <version>${revapi-java.version}</version>
             </dependency>
+            <dependency>
+              <groupId>org.revapi</groupId>
+              <artifactId>revapi-reporter-json</artifactId>
+              <version>${revapi-reporter-json-version}</version>
+            </dependency>
           </dependencies>
           <configuration>
             <failBuildOnProblemsFound>true</failBuildOnProblemsFound>
             <versionFormat>[0-9.]*</versionFormat>
             <analysisConfiguration>
-              <revapi.semver.ignore>
+              <revapi.reporter.json>
+                <minSeverity>POTENTIALLY_BREAKING</minSeverity>
+                <minCriticality>documented</minCriticality>
+                <output>revapi-result.json</output>
+                <indent>false</indent>
+                <append>false</append>
+                <keepEmptyFile>true</keepEmptyFile>
+              </revapi.reporter.json>
+              <revapi.versions>
                 <enabled>true</enabled>
-              </revapi.semver.ignore>
+              </revapi.versions>
               <revapi.differences>
                 <justification>SpotBugs annotations are save to change</justification>
                 <criticality>allowed</criticality>
@@ -692,7 +717,30 @@
                     <code>java.annotation.*</code>
                     <annotationType>edu.umd.cs.findbugs.annotations.*</annotationType>
                   </item>
-                </differences>
+                  <item>
+                    <regex>true</regex>
+                    <code>java.class.nonPublicPartOfAPI</code>
+                    <classQualifiedName>org.jvnet.hudson.*</classQualifiedName>
+                    <justification>Not relevant</justification>
+                  </item>
+                  <item>
+                    <regex>true</regex>
+                    <code>java.class.nonPublicPartOfAPI</code>
+                    <classQualifiedName>net.sf.json.*</classQualifiedName>
+                    <justification>Not relevant</justification>
+                  </item>
+                  <item>
+                    <regex>true</regex>
+                    <code>java.class.nonPublicPartOfAPI</code>
+                    <classQualifiedName>org.jvnet.hudson.*</classQualifiedName>
+                    <justification>Not relevant</justification>
+                  </item>
+                  <item>
+                    <regex>true</regex>
+                    <code>java.class.nonPublicPartOfAPI</code>
+                    <classQualifiedName>net.sf.json.*</classQualifiedName>
+                    <justification>Not relevant</justification>
+                  </item>
               </revapi.differences>
             </analysisConfiguration>
           </configuration>
@@ -700,7 +748,7 @@
             <execution>
               <id>run-revapi</id>
               <goals>
-                <goal>check</goal>
+                <goal>report</goal>
               </goals>
               <phase>verify</phase>
             </execution>
