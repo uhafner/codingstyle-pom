@@ -56,7 +56,7 @@
     <java.version>1.8</java.version>
     <module.name>codingstyle-pom</module.name>
 
-    <codingstyle.config.version>2.21.0</codingstyle.config.version>
+    <codingstyle.config.version>2.22.0</codingstyle.config.version>
     <codingstyle.library.version>${codingstyle.config.version}</codingstyle.library.version>
 
     <!-- Project Dependencies Configuration -->
