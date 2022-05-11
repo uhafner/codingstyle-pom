@@ -711,36 +711,6 @@
               <revapi.differences>
                 <justification>SpotBugs annotations are save to change</justification>
                 <criticality>allowed</criticality>
-                <differences>
-                  <item>
-                    <regex>true</regex>
-                    <code>java.annotation.*</code>
-                    <annotationType>edu.umd.cs.findbugs.annotations.*</annotationType>
-                  </item>
-                  <item>
-                    <regex>true</regex>
-                    <code>java.class.nonPublicPartOfAPI</code>
-                    <classQualifiedName>org.jvnet.hudson.*</classQualifiedName>
-                    <justification>Not relevant</justification>
-                  </item>
-                  <item>
-                    <regex>true</regex>
-                    <code>java.class.nonPublicPartOfAPI</code>
-                    <classQualifiedName>net.sf.json.*</classQualifiedName>
-                    <justification>Not relevant</justification>
-                  </item>
-                  <item>
-                    <regex>true</regex>
-                    <code>java.class.nonPublicPartOfAPI</code>
-                    <classQualifiedName>org.jvnet.hudson.*</classQualifiedName>
-                    <justification>Not relevant</justification>
-                  </item>
-                  <item>
-                    <regex>true</regex>
-                    <code>java.class.nonPublicPartOfAPI</code>
-                    <classQualifiedName>net.sf.json.*</classQualifiedName>
-                    <justification>Not relevant</justification>
-                  </item>
               </revapi.differences>
             </analysisConfiguration>
           </configuration>
