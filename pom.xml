@@ -698,9 +698,9 @@
             <versionFormat>[0-9.]*</versionFormat>
             <analysisConfiguration>
               <revapi.reporter.json>
-                <minSeverity>POTENTIALLY_BREAKING</minSeverity>
+                <minSeverity>NON_BREAKING</minSeverity>
                 <minCriticality>documented</minCriticality>
-                <output>revapi-result.json</output>
+                <output>${build.outputDirectory}/revapi-result.json</output>
                 <indent>false</indent>
                 <append>false</append>
                 <keepEmptyFile>true</keepEmptyFile>
@@ -709,8 +709,13 @@
                 <enabled>true</enabled>
               </revapi.versions>
               <revapi.differences>
-                <justification>SpotBugs annotations are save to change</justification>
-                <criticality>allowed</criticality>
+                <differences>
+                  <item>
+                    <regex>true</regex>
+                    <code>java.annotation.*</code>
+                    <annotationType>edu.umd.cs.findbugs.annotations.*</annotationType>
+                  </item>
+                </differences>
               </revapi.differences>
             </analysisConfiguration>
           </configuration>
