@@ -700,7 +700,7 @@
               <revapi.reporter.json>
                 <minSeverity>NON_BREAKING</minSeverity>
                 <minCriticality>documented</minCriticality>
-                <output>${build.outputDirectory}/revapi-result.json</output>
+                <output>${project.build.outputDirectory}/revapi-result.json</output>
                 <indent>false</indent>
                 <append>false</append>
                 <keepEmptyFile>true</keepEmptyFile>
