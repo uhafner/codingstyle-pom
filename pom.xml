@@ -56,7 +56,7 @@
     <java.version>1.8</java.version>
     <module.name>codingstyle-pom</module.name>
 
-    <codingstyle.config.version>2.22.0</codingstyle.config.version>
+    <codingstyle.config.version>2.23.0</codingstyle.config.version>
     <codingstyle.library.version>${codingstyle.config.version}</codingstyle.library.version>
 
     <!-- Project Dependencies Configuration -->
@@ -129,11 +129,6 @@
         <groupId>edu.hm.hafner</groupId>
         <artifactId>codingstyle</artifactId>
         <version>${codingstyle.config.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>net.bytebuddy</groupId>
-        <artifactId>byte-buddy</artifactId>
-        <version>1.12.10</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
