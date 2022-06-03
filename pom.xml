@@ -136,17 +136,6 @@
         <artifactId>byte-buddy</artifactId>
         <version>1.12.9</version>
       </dependency>
-      <!-- Not everything needs revApi or the reporter -->
-      <dependency>
-        <groupId>org.revapi</groupId>
-        <artifactId>revapi-java</artifactId>
-        <version>${revapi-java.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.revapi</groupId>
-        <artifactId>revapi-reporter-json</artifactId>
-        <version>${revapi-reporter-json-version}</version>
-      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -615,6 +604,58 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.revapi</groupId>
+        <artifactId>revapi-maven-plugin</artifactId>
+        <version>${revapi-maven-plugin.version}</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.revapi</groupId>
+            <artifactId>revapi-java</artifactId>
+            <version>${revapi-java.version}</version>
+          </dependency>
+          <dependency>
+            <groupId>org.revapi</groupId>
+            <artifactId>revapi-reporter-json</artifactId>
+            <version>${revapi-reporter-json-version}</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <failBuildOnProblemsFound>true</failBuildOnProblemsFound>
+          <versionFormat>[0-9.]*</versionFormat>
+          <analysisConfiguration>
+            <revapi.reporter.json>
+              <minSeverity>NON_BREAKING</minSeverity>
+              <minCriticality>documented</minCriticality>
+              <output>${project.build.directory}/revapi-result.json</output>
+              <indent>false</indent>
+              <append>false</append>
+              <keepEmptyFile>true</keepEmptyFile>
+            </revapi.reporter.json>
+            <revapi.versions>
+              <enabled>true</enabled>
+            </revapi.versions>
+            <revapi.differences>
+              <differences>
+                <item>
+                  <regex>true</regex>
+                  <code>java.annotation.*</code>
+                  <annotationType>edu.umd.cs.findbugs.annotations.*</annotationType>
+                </item>
+              </differences>
+            </revapi.differences>
+          </analysisConfiguration>
+        </configuration>
+        <executions>
+          <execution>
+            <id>run-revapi</id>
+            <goals>
+              <goal>check</goal>
+            </goals>
+            <phase>verify</phase>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
 
     <pluginManagement>
@@ -676,58 +717,6 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-dependency-plugin</artifactId>
           <version>${maven-dependency-plugin.version}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.revapi</groupId>
-          <artifactId>revapi-maven-plugin</artifactId>
-          <version>${revapi-maven-plugin.version}</version>
-          <dependencies>
-            <dependency>
-              <groupId>org.revapi</groupId>
-              <artifactId>revapi-java</artifactId>
-              <version>${revapi-java.version}</version>
-            </dependency>
-            <dependency>
-              <groupId>org.revapi</groupId>
-              <artifactId>revapi-reporter-json</artifactId>
-              <version>${revapi-reporter-json-version}</version>
-            </dependency>
-          </dependencies>
-          <configuration>
-            <failBuildOnProblemsFound>true</failBuildOnProblemsFound>
-            <versionFormat>[0-9.]*</versionFormat>
-            <analysisConfiguration>
-              <revapi.reporter.json>
-                <minSeverity>NON_BREAKING</minSeverity>
-                <minCriticality>documented</minCriticality>
-                <output>${project.build.outputDirectory}/revapi-result.json</output>
-                <indent>false</indent>
-                <append>false</append>
-                <keepEmptyFile>true</keepEmptyFile>
-              </revapi.reporter.json>
-              <revapi.versions>
-                <enabled>true</enabled>
-              </revapi.versions>
-              <revapi.differences>
-                <differences>
-                  <item>
-                    <regex>true</regex>
-                    <code>java.annotation.*</code>
-                    <annotationType>edu.umd.cs.findbugs.annotations.*</annotationType>
-                  </item>
-                </differences>
-              </revapi.differences>
-            </analysisConfiguration>
-          </configuration>
-          <executions>
-            <execution>
-              <id>run-revapi</id>
-              <goals>
-                <goal>report</goal>
-              </goals>
-              <phase>verify</phase>
-            </execution>
-          </executions>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
