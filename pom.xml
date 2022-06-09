@@ -68,7 +68,7 @@
     <!-- Project Test Dependencies Configuration -->
     <junit.version>5.8.2</junit.version>
     <junit-pioneer.version>1.7.0</junit-pioneer.version>
-    <mockito.version>4.5.1</mockito.version>
+    <mockito.version>4.6.1</mockito.version>
     <assertj.version>3.22.0</assertj.version>
     <archunit.version>0.23.1</archunit.version>
     <slf4j-simple.version>1.7.30</slf4j-simple.version>
@@ -83,9 +83,9 @@
     <maven-javadoc-plugin.version>3.4.0</maven-javadoc-plugin.version>
     <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
     <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
-    <maven-surefire-plugin.version>3.0.0-M6</maven-surefire-plugin.version>
+    <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
     <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
-    <maven-pmd-plugin.version>3.16.0</maven-pmd-plugin.version>
+    <maven-pmd-plugin.version>3.17.0</maven-pmd-plugin.version>
     <pmd.version>6.45.0</pmd.version>
     <maven-checkstyle-plugin.version>3.1.2</maven-checkstyle-plugin.version>
     <checkstyle.version>10.2</checkstyle.version>
@@ -93,7 +93,7 @@
     <findsecbugs-plugin.version>1.12.0</findsecbugs-plugin.version>
     <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
     <maven-pitest-plugin.version>1.7.6</maven-pitest-plugin.version>
-    <pitest-junit5-plugin.version>0.15</pitest-junit5-plugin.version>
+    <pitest-junit5-plugin.version>0.16</pitest-junit5-plugin.version>
     <error-prone.version>2.13.1</error-prone.version>
     <nullaway.version>0.9.7</nullaway.version>
     <revapi-maven-plugin.version>0.14.6</revapi-maven-plugin.version>
