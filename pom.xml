@@ -75,7 +75,7 @@
     <equalsverifier.version>3.10.1</equalsverifier.version>
 
     <!-- Maven Plug-ins Configuration -->
-    <maven-deploy-plugin.version>3.0.0-M2</maven-deploy-plugin.version>
+    <maven-deploy-plugin.version>3.0.0</maven-deploy-plugin.version>
     <maven-site-plugin.version>3.12.0</maven-site-plugin.version>
     <maven-install-plugin.version>3.0.1</maven-install-plugin.version>
     <maven-clean-plugin.version>3.2.0</maven-clean-plugin.version>
