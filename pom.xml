@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>edu.hm.hafner</groupId>
   <artifactId>codingstyle-pom</artifactId>
-  <version>2.30.0-SNAPSHOT</version>
+  <version>3.0.0-SNAPSHOT</version>
 
   <packaging>pom</packaging>
 
@@ -53,17 +53,17 @@
   <properties>
     <source.encoding>UTF-8</source.encoding>
     <project.build.sourceEncoding>${source.encoding}</project.build.sourceEncoding>
-    <java.version>1.8</java.version>
-    <module.name>codingstyle-pom</module.name>
+    <java.version>11</java.version>
+    <module.name>undefined</module.name>
 
     <codingstyle.config.version>2.25.0</codingstyle.config.version>
     <codingstyle.library.version>${codingstyle.config.version}</codingstyle.library.version>
 
     <!-- Project Dependencies Configuration -->
-    <javax.annotation-api.version>1.3.2</javax.annotation-api.version>
     <spotbugs.version>4.7.2</spotbugs.version>
     <streamex.version>0.8.1</streamex.version>
     <commons.lang.version>3.12.0</commons.lang.version>
+    <javax.annotation-api.version>1.3.2</javax.annotation-api.version>
 
     <!-- Project Test Dependencies Configuration -->
     <junit.version>5.9.0</junit.version>
@@ -107,7 +107,6 @@
     <maven-enforcer-plugin.version>3.1.0</maven-enforcer-plugin.version>
     <maven-dependency-plugin.version>3.3.0</maven-dependency-plugin.version>
     <depgraph-maven-plugin.version>4.0.2</depgraph-maven-plugin.version>
-    <animal-sniffer-maven-plugin.version>1.22</animal-sniffer-maven-plugin.version>
 
     <!-- Maven Surefire ArgLine -->
     <argLine>-Djava.util.logging.config.file=logging.properties</argLine>
@@ -256,27 +255,6 @@
         </executions>
       </plugin>
       <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>animal-sniffer-maven-plugin</artifactId>
-        <version>${animal-sniffer-maven-plugin.version}</version>
-        <configuration>
-          <signature>
-            <groupId>org.codehaus.mojo.signature</groupId>
-            <artifactId>java18</artifactId>
-            <version>1.0</version>
-          </signature>
-        </configuration>
-        <executions>
-          <execution>
-            <id>animal-sniffer</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
         <version>${maven-release-plugin.version}</version>
@@ -303,10 +281,7 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>${maven-compiler-plugin.version}</version>
         <configuration>
-          <source>${java.version}</source>
-          <target>${java.version}</target>
-          <testSource>${java.version}</testSource>
-          <testTarget>${java.version}</testTarget>
+          <release>${java.version}</release>
           <annotationProcessorPaths>
             <path>
               <groupId>com.google.errorprone</groupId>
@@ -351,6 +326,12 @@
                 Disabled ErrorProne rule:
                 --> -Xep:ReturnMissingNullable:OFF <!--
                 Disabled ErrorProne rule:
+                --> -Xep:CannotMockFinalMethod:OFF <!--
+                Disabled ErrorProne rule:
+                --> -Xep:Java8ApiChecker:OFF <!--
+                Disabled ErrorProne rule:
+                --> -Xep:ImmutableMemberCollection:OFF <!--
+                Disabled ErrorProne rule:
                 --> -Xep:PreferJavaTimeOverload:OFF <!--
                 Disabled ErrorProne rule:
                 --> -Xep:EqualsGetClass:OFF <!--
@@ -370,8 +351,6 @@
                 --> -Xep:ThrowsUncheckedException:OFF <!--
                 Disabled ErrorProne rule:
                 --> -Xep:UnusedMethod:OFF <!--
-                Disabled ErrorProne rule:
-                --> -Xep:ImmutableMemberCollection:OFF <!--
                 Disabled ErrorProne rule:
                 --> -Xep:BooleanParameter:OFF <!--
                 Disabled ErrorProne rule:
@@ -761,24 +740,6 @@
           <version>${maven-enforcer-plugin.version}</version>
           <executions>
             <execution>
-              <id>display-info</id>
-              <configuration>
-                <rules>
-                  <enforceBytecodeVersion>
-                    <ignoreClasses>
-                      <!-- asm dependency from PMD contains a java9 module-info.class -->
-                      <ignoreClass>module-info</ignoreClass>
-                      <!-- Junit >= 5.3 contains some java9 classes -->
-                      <ignoreClass>*/ModuleUtils*</ignoreClass>
-                      <!-- ArchUnit >= 0.23.0 contains some java9 classes -->
-                      <ignoreClass>com/tngtech/archunit/core/importer/Module*</ignoreClass>
-                      <ignoreClass>com/tngtech/archunit/core/domain/Java9DomainPlugin*</ignoreClass>
-                    </ignoreClasses>
-                  </enforceBytecodeVersion>
-                </rules>
-              </configuration>
-            </execution>
-            <execution>
               <id>enforce-require-property-diverges</id>
               <goals>
                 <goal>enforce</goal>
@@ -787,7 +748,7 @@
                 <rules>
                   <requirePropertyDiverges>
                     <property>module.name</property>
-                    <regex>codingstyle-pom</regex>
+                    <regex>undefined</regex>
                   </requirePropertyDiverges>
                 </rules>
                 <fail>true</fail>
