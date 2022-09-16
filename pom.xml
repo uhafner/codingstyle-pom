@@ -521,7 +521,7 @@
         </executions>
         <configuration>
           <linkXRef>false</linkXRef>
-          <excludes>**/*Assert*.java,**/*_jmh*</excludes>
+          <excludes>**/*Assert*.java,**/*_jmh*,**/module-info.java</excludes>
           <failOnViolation>false</failOnViolation>
           <configLocation>checkstyle-configuration.xml</configLocation>
           <includeTestSourceDirectory>true</includeTestSourceDirectory>
@@ -623,6 +623,8 @@
         <configuration>
           <versionFormat>[-0-9.]*</versionFormat>
           <failBuildOnProblemsFound>true</failBuildOnProblemsFound>
+          <checkDependencies>true</checkDependencies>
+          <failOnUnresolvedArtifacts>true</failOnUnresolvedArtifacts>
           <pipelineConfiguration>
             <transformBlocks>
               <block>
