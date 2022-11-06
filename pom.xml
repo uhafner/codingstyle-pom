@@ -68,7 +68,7 @@
     <!-- Project Test Dependencies Configuration -->
     <junit.version>5.9.1</junit.version>
     <junit-pioneer.version>1.7.1</junit-pioneer.version>
-    <mockito.version>4.8.0</mockito.version>
+    <mockito.version>4.8.1</mockito.version>
     <assertj.version>3.23.1</assertj.version>
     <archunit.version>1.0.0</archunit.version>
     <slf4j-simple.version>2.0.3</slf4j-simple.version>
