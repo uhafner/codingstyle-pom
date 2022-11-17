@@ -21,7 +21,7 @@
   </description>
 
   <scm>
-    <connection>scm:git:git://github.com/uhafner/codingstyle-pom.git</connection>
+    <connection>scm:git:https://github.com/uhafner/codingstyle-pom.git</connection>
     <developerConnection>scm:git:git@github.com:uhafner/codingstyle-pom.git</developerConnection>
     <url>https://github.com/uhafner/codingstyle-pom</url>
     <tag>v3.0.0</tag>
