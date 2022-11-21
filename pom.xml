@@ -72,7 +72,7 @@
     <assertj.version>3.23.1</assertj.version>
     <archunit.version>1.0.0</archunit.version>
     <slf4j-simple.version>2.0.3</slf4j-simple.version>
-    <equalsverifier.version>3.11</equalsverifier.version>
+    <equalsverifier.version>3.11.1</equalsverifier.version>
 
     <!-- Maven Plug-ins Configuration -->
     <maven-deploy-plugin.version>3.0.0</maven-deploy-plugin.version>
