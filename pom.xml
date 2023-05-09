@@ -64,6 +64,7 @@
     <streamex.version>0.8.1</streamex.version>
     <commons.lang.version>3.12.0</commons.lang.version>
     <javax.annotation-api.version>1.3.2</javax.annotation-api.version>
+    <byte-buddy.version>1.14.4</byte-buddy.version>
 
     <!-- Project Test Dependencies Configuration -->
     <junit.version>5.9.3</junit.version>
@@ -137,6 +138,11 @@
         <groupId>edu.hm.hafner</groupId>
         <artifactId>codingstyle</artifactId>
         <version>${codingstyle.config.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>net.bytebuddy</groupId>
+        <artifactId>byte-buddy</artifactId>
+        <version>${byte-buddy.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
