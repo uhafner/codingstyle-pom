@@ -1,5 +1,5 @@
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/edu.hm.hafner/codingstyle-pom/badge.svg)](https://maven-badges.herokuapp.com/maven-central/edu.hm.hafner/codingstyle-pom)
-[![GitHub Actions](https://github.com/uhafner/codingstyle-pom/workflows/GitHub%20CI/badge.svg?branch=master)](https://github.com/uhafner/codingstyle-pom/actions)
+[![GitHub Actions](https://github.com/uhafner/codingstyle-pom/workflows/GitHub%20CI/badge.svg?branch=main)](https://github.com/uhafner/codingstyle-pom/actions)
 [![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](https://en.wikipedia.org/wiki/MIT_License)
 
 Each Java project should follow a given coding style. I.e., all contributions to the source code should use the same 
