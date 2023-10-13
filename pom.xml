@@ -800,6 +800,7 @@
               <assertionsEntryPointClass>assertions_entry_point_class_template.txt</assertionsEntryPointClass>
               <softEntryPointAssertionClass>soft_assertions_entry_point_class_template.txt</softEntryPointAssertionClass>
               <objectAssertion>has_assertion_template.txt</objectAssertion>
+              <assertionClass>assertion_class_template.txt</assertionClass>
             </templates>
           </configuration>
           <dependencies>
