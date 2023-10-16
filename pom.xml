@@ -63,6 +63,7 @@
     <spotbugs.version>4.7.3</spotbugs.version>
     <streamex.version>0.8.2</streamex.version>
     <commons.lang.version>3.13.0</commons.lang.version>
+    <commons.io.version>2.11.0</commons.io.version>
     <byte-buddy.version>1.14.9</byte-buddy.version>
 
     <!-- Project Test Dependencies Configuration -->
@@ -151,6 +152,12 @@
       <groupId>com.github.spotbugs</groupId>
       <artifactId>spotbugs-annotations</artifactId>
       <version>${spotbugs.version}</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>jsr305</artifactId>
+          <groupId>com.google.code.findbugs</groupId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>com.google.errorprone</groupId>
@@ -171,6 +178,11 @@
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
       <version>${commons.lang.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>${commons.io.version}</version>
     </dependency>
 
     <!-- Test Dependencies -->
