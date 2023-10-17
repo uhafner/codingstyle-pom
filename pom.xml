@@ -63,7 +63,7 @@
     <spotbugs.version>4.7.3</spotbugs.version>
     <streamex.version>0.8.2</streamex.version>
     <commons.lang.version>3.13.0</commons.lang.version>
-    <commons.io.version>2.11.0</commons.io.version>
+    <commons.io.version>2.14.0</commons.io.version>
     <byte-buddy.version>1.14.9</byte-buddy.version>
 
     <!-- Project Test Dependencies Configuration -->
