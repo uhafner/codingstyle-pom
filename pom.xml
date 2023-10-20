@@ -65,6 +65,8 @@
     <commons.lang.version>3.13.0</commons.lang.version>
     <commons.io.version>2.11.0</commons.io.version>
     <byte-buddy.version>1.14.9</byte-buddy.version>
+    <slf4j.version>2.0.9</slf4j.version>
+    <commons-logging.version>1.2</commons-logging.version>
 
     <!-- Project Test Dependencies Configuration -->
     <junit.version>5.10.0</junit.version>
@@ -72,7 +74,6 @@
     <mockito.version>5.6.0</mockito.version>
     <assertj.version>3.24.2</assertj.version>
     <archunit.version>1.1.0</archunit.version>
-    <slf4j-simple.version>2.0.9</slf4j-simple.version>
     <equalsverifier.version>3.15.2</equalsverifier.version>
 
     <!-- Maven Plug-ins Configuration -->
@@ -143,6 +144,16 @@
         <groupId>net.bytebuddy</groupId>
         <artifactId>byte-buddy</artifactId>
         <version>${byte-buddy.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>slf4j-api</artifactId>
+        <groupId>org.slf4j</groupId>
+        <version>${slf4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-logging</groupId>
+        <artifactId>commons-logging</artifactId>
+        <version>${commons-logging.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -232,7 +243,7 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
-      <version>${slf4j-simple.version}</version>
+      <version>${slf4j.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
