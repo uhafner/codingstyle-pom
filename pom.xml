@@ -60,7 +60,7 @@
     <codingstyle.library.version>3.25.0</codingstyle.library.version>
 
     <!-- Project Dependencies Configuration -->
-    <spotbugs.version>4.7.3</spotbugs.version>
+    <spotbugs.version>4.8.1</spotbugs.version>
     <streamex.version>0.8.2</streamex.version>
     <commons.lang.version>3.13.0</commons.lang.version>
     <commons.io.version>2.11.0</commons.io.version>
