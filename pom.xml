@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+
   <groupId>edu.hm.hafner</groupId>
   <artifactId>codingstyle-pom</artifactId>
   <version>3.43.0-SNAPSHOT</version>
-
   <packaging>pom</packaging>
 
   <name>Java coding style POM</name>
@@ -19,14 +18,7 @@
     If you want to use this coding style as well you can use this Maven POM as parent of you own POM. Then you
     get the configuration several static analysis and testing tools for free.
   </description>
-
-  <scm>
-    <connection>scm:git:https://github.com/uhafner/codingstyle-pom.git</connection>
-    <developerConnection>scm:git:git@github.com:uhafner/codingstyle-pom.git</developerConnection>
-    <url>https://github.com/uhafner/codingstyle-pom</url>
-    <tag>HEAD</tag>
-  </scm>
-
+  <url>https://www.cs.hm.edu/die_fakultaet/ansprechpartner/professoren/hafner/index.de.html</url>
   <licenses>
     <license>
       <name>MIT license</name>
@@ -48,7 +40,22 @@
     </developer>
   </developers>
 
-  <url>https://www.cs.hm.edu/die_fakultaet/ansprechpartner/professoren/hafner/index.de.html</url>
+  <scm>
+    <connection>scm:git:https://github.com/uhafner/codingstyle-pom.git</connection>
+    <developerConnection>scm:git:git@github.com:uhafner/codingstyle-pom.git</developerConnection>
+    <url>https://github.com/uhafner/codingstyle-pom</url>
+    <tag>HEAD</tag>
+  </scm>
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>
 
   <properties>
     <source.encoding>UTF-8</source.encoding>
@@ -146,8 +153,8 @@
         <version>${byte-buddy.version}</version>
       </dependency>
       <dependency>
-        <artifactId>slf4j-api</artifactId>
         <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
         <version>${slf4j.version}</version>
       </dependency>
       <dependency>
@@ -157,7 +164,6 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
   <dependencies>
     <dependency>
       <groupId>com.github.spotbugs</groupId>
@@ -165,8 +171,8 @@
       <version>${spotbugs.version}</version>
       <exclusions>
         <exclusion>
-          <artifactId>jsr305</artifactId>
           <groupId>com.google.code.findbugs</groupId>
+          <artifactId>jsr305</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -274,8 +280,8 @@
       <groupId>edu.hm.hafner</groupId>
       <artifactId>codingstyle</artifactId>
       <version>${codingstyle.library.version}</version>
-      <scope>test</scope>
       <type>test-jar</type>
+      <scope>test</scope>
       <exclusions>
         <exclusion>
           <groupId>com.google.errorprone</groupId>
@@ -298,6 +304,122 @@
   </dependencies>
 
   <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.pitest</groupId>
+          <artifactId>pitest-maven</artifactId>
+          <version>${maven-pitest-plugin.version}</version>
+          <dependencies>
+            <dependency>
+              <groupId>org.pitest</groupId>
+              <artifactId>pitest-junit5-plugin</artifactId>
+              <version>${pitest-junit5-plugin.version}</version>
+            </dependency>
+          </dependencies>
+          <configuration>
+            <outputFormats>XML,HTML</outputFormats>
+            <excludedTestClasses>
+              <param>*ITest</param>
+            </excludedTestClasses>
+            <excludedMethods>
+              <param>*equals</param>
+              <param>*hashCode</param>
+              <param>*toString</param>
+            </excludedMethods>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>${maven-clean-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>${maven-install-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>${maven-site-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>${maven-deploy-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>${maven-dependency-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>${maven-enforcer-plugin.version}</version>
+          <executions>
+            <execution>
+              <id>enforce-require-property-diverges</id>
+              <goals>
+                <goal>enforce</goal>
+              </goals>
+              <configuration>
+                <rules>
+                  <requirePropertyDiverges>
+                    <property>module.name</property>
+                    <regex>undefined</regex>
+                  </requirePropertyDiverges>
+                </rules>
+                <fail>true</fail>
+              </configuration>
+            </execution>
+          </executions>
+          <dependencies>
+            <dependency>
+              <groupId>org.codehaus.mojo</groupId>
+              <artifactId>extra-enforcer-rules</artifactId>
+              <version>1.7.0</version>
+            </dependency>
+          </dependencies>
+        </plugin>
+        <plugin>
+          <groupId>org.assertj</groupId>
+          <artifactId>assertj-assertions-generator-maven-plugin</artifactId>
+          <version>${assertj-assertions-generator-maven-plugin.version}</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>generate-assertions</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <quiet>true</quiet>
+            <cleanTargetDir>true</cleanTargetDir>
+            <hierarchical>false</hierarchical>
+            <generateBddAssertions>false</generateBddAssertions>
+            <generateJUnitSoftAssertions>false</generateJUnitSoftAssertions>
+            <generateSoftAssertions>true</generateSoftAssertions>
+            <templates>
+              <templatesDirectory>${project.basedir}/etc/assertj-templates/</templatesDirectory>
+              <assertionsEntryPointClass>assertions_entry_point_class_template.txt</assertionsEntryPointClass>
+              <softEntryPointAssertionClass>soft_assertions_entry_point_class_template.txt</softEntryPointAssertionClass>
+              <objectAssertion>has_assertion_template.txt</objectAssertion>
+              <assertionClass>assertion_class_template.txt</assertionClass>
+            </templates>
+          </configuration>
+          <dependencies>
+            <!-- Without this dependency mvn test will fail due to a class not found exception -->
+            <dependency>
+              <groupId>junit</groupId>
+              <artifactId>junit</artifactId>
+              <version>4.13.2</version>
+            </dependency>
+          </dependencies>
+        </plugin>
+      </plugins>
+    </pluginManagement>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -746,123 +868,6 @@
         </executions>
       </plugin>
     </plugins>
-
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.pitest</groupId>
-          <artifactId>pitest-maven</artifactId>
-          <version>${maven-pitest-plugin.version}</version>
-          <dependencies>
-            <dependency>
-              <groupId>org.pitest</groupId>
-              <artifactId>pitest-junit5-plugin</artifactId>
-              <version>${pitest-junit5-plugin.version}</version>
-            </dependency>
-          </dependencies>
-          <configuration>
-            <outputFormats>XML,HTML</outputFormats>
-            <excludedTestClasses>
-              <param>*ITest</param>
-            </excludedTestClasses>
-            <excludedMethods>
-              <param>*equals</param>
-              <param>*hashCode</param>
-              <param>*toString</param>
-            </excludedMethods>
-          </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-clean-plugin</artifactId>
-          <version>${maven-clean-plugin.version}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-install-plugin</artifactId>
-          <version>${maven-install-plugin.version}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-site-plugin</artifactId>
-          <version>${maven-site-plugin.version}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-deploy-plugin</artifactId>
-          <version>${maven-deploy-plugin.version}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-dependency-plugin</artifactId>
-          <version>${maven-dependency-plugin.version}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-enforcer-plugin</artifactId>
-          <version>${maven-enforcer-plugin.version}</version>
-          <executions>
-            <execution>
-              <id>enforce-require-property-diverges</id>
-              <goals>
-                <goal>enforce</goal>
-              </goals>
-              <configuration>
-                <rules>
-                  <requirePropertyDiverges>
-                    <property>module.name</property>
-                    <regex>undefined</regex>
-                  </requirePropertyDiverges>
-                </rules>
-                <fail>true</fail>
-              </configuration>
-            </execution>
-          </executions>
-          <dependencies>
-            <dependency>
-              <groupId>org.codehaus.mojo</groupId>
-              <artifactId>extra-enforcer-rules</artifactId>
-              <version>1.7.0</version>
-            </dependency>
-          </dependencies>
-        </plugin>
-        <plugin>
-          <groupId>org.assertj</groupId>
-          <artifactId>assertj-assertions-generator-maven-plugin</artifactId>
-          <version>${assertj-assertions-generator-maven-plugin.version}</version>
-          <executions>
-            <execution>
-              <goals>
-                <goal>generate-assertions</goal>
-              </goals>
-            </execution>
-          </executions>
-          <configuration>
-            <quiet>true</quiet>
-            <cleanTargetDir>true</cleanTargetDir>
-            <hierarchical>false</hierarchical>
-            <generateBddAssertions>false</generateBddAssertions>
-            <generateJUnitSoftAssertions>false</generateJUnitSoftAssertions>
-            <generateSoftAssertions>true</generateSoftAssertions>
-            <templates>
-              <templatesDirectory>${project.basedir}/etc/assertj-templates/</templatesDirectory>
-              <assertionsEntryPointClass>assertions_entry_point_class_template.txt</assertionsEntryPointClass>
-              <softEntryPointAssertionClass>soft_assertions_entry_point_class_template.txt</softEntryPointAssertionClass>
-              <objectAssertion>has_assertion_template.txt</objectAssertion>
-              <assertionClass>assertion_class_template.txt</assertionClass>
-            </templates>
-          </configuration>
-          <dependencies>
-            <!-- Without this dependency mvn test will fail due to a class not found exception -->
-            <dependency>
-              <groupId>junit</groupId>
-              <artifactId>junit</artifactId>
-              <version>4.13.2</version>
-            </dependency>
-          </dependencies>
-        </plugin>
-      </plugins>
-    </pluginManagement>
   </build>
 
   <profiles>
@@ -950,16 +955,4 @@
       </build>
     </profile>
   </profiles>
-
-  <distributionManagement>
-    <snapshotRepository>
-      <id>ossrh</id>
-      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-    </snapshotRepository>
-    <repository>
-      <id>ossrh</id>
-      <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-    </repository>
-  </distributionManagement>
-
 </project>
