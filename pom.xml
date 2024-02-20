@@ -15,7 +15,7 @@
     GitHub project codingstyle (https://github.com/uhafner/codingstyle) - I am using this coding style in my lectures
     about software development at Munich University of Applied Sciences and in all of my open source projects.
 
-    If you want to use this coding style as well you can use this Maven POM as parent of you own POM. Then you
+    If you want to use this coding style as well, you can use this Maven POM as parent of your own POM. Then you
     get the configuration several static analysis and testing tools for free.
   </description>
   <url>https://www.cs.hm.edu/die_fakultaet/ansprechpartner/professoren/hafner/index.de.html</url>
