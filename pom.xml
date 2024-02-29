@@ -116,6 +116,9 @@
     <maven-enforcer-plugin.version>3.4.1</maven-enforcer-plugin.version>
     <maven-dependency-plugin.version>3.6.1</maven-dependency-plugin.version>
     <depgraph-maven-plugin.version>4.0.3</depgraph-maven-plugin.version>
+    <rewrite-maven-plugin.version>5.23.3</rewrite-maven-plugin.version>
+    <rewrite-testing-frameworks.version>2.4.1</rewrite-testing-frameworks.version>
+    <sortpom-maven-plugin.version>3.4.0</sortpom-maven-plugin.version>
 
     <!-- Maven Surefire ArgLine -->
     <argLine>-Djava.util.logging.config.file=logging.properties</argLine>
@@ -164,6 +167,7 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+
   <dependencies>
     <dependency>
       <groupId>com.github.spotbugs</groupId>
@@ -417,6 +421,28 @@
               <version>4.13.2</version>
             </dependency>
           </dependencies>
+        </plugin>
+        <plugin>
+          <groupId>org.openrewrite.maven</groupId>
+          <artifactId>rewrite-maven-plugin</artifactId>
+          <version>${rewrite-maven-plugin.version}</version>
+          <configuration>
+            <activeRecipes>
+              <recipe>org.openrewrite.java.testing.assertj.SimplifyChainedAssertJAssertions</recipe>
+            </activeRecipes>
+          </configuration>
+          <dependencies>
+            <dependency>
+              <groupId>org.openrewrite.recipe</groupId>
+              <artifactId>rewrite-testing-frameworks</artifactId>
+              <version>${rewrite-testing-frameworks.version}</version>
+            </dependency>
+          </dependencies>
+        </plugin>
+        <plugin>
+          <groupId>com.github.ekryd.sortpom</groupId>
+          <artifactId>sortpom-maven-plugin</artifactId>
+          <version>${sortpom-maven-plugin.version}</version>
         </plugin>
       </plugins>
     </pluginManagement>
