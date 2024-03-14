@@ -60,8 +60,8 @@
     <java.version>11</java.version>
     <module.name>undefined</module.name>
 
-    <codingstyle.config.version>4.0.0</codingstyle.config.version>
-    <codingstyle.library.version>4.0.0</codingstyle.library.version>
+    <codingstyle.config.version>4.0.1</codingstyle.config.version>
+    <codingstyle.library.version>4.0.1</codingstyle.library.version>
 
     <!-- Project Dependencies Configuration -->
     <spotbugs.version>4.8.3</spotbugs.version>
@@ -554,108 +554,55 @@
             separated only by spaces. Once we drop support for JDK 8 we can clean this up; later versions
             do properly handle newline separators. See https://github.com/google/error-prone/pull/1115.
             -->
-            <arg>
-              -Xplugin:ErrorProne
-              <!--
+            <arg>-Xplugin:ErrorProne <!--
                 ErrorProne configuration:
-                -->
-              -XepExcludedPaths:.*/generated-test-sources/.*
-              <!--
+                --> -XepExcludedPaths:.*/generated-test-sources/.* <!--
                 ErrorProne configuration:
-                -->
-              -XepAllDisabledChecksAsWarnings
-              <!--
+                --> -XepAllDisabledChecksAsWarnings <!--
                 ErrorProne configuration:
-                -->
-              -XepIgnoreUnknownCheckNames
-              <!--
+                --> -XepIgnoreUnknownCheckNames <!--
                 ErrorProne configuration:
-                -->
-              -XepDisableWarningsInGeneratedCode
-              <!--
+                --> -XepDisableWarningsInGeneratedCode <!--
                 ErrorProne configuration:
-                -->
-              -XepAllErrorsAsWarnings
-              <!--
+                --> -XepAllErrorsAsWarnings <!--
                 NullAway configuration:
-                -->
-              -Xep:NullAway:WARN
-              <!--
+                --> -Xep:NullAway:WARN <!--
                 NullAway configuration:
-                -->
-              -XepOpt:NullAway:AnnotatedPackages=edu.hm.hafner
-              <!--
+                --> -XepOpt:NullAway:AnnotatedPackages=edu.hm.hafner <!--
                 Disabled ErrorProne rule:
-                -->
-              -Xep:ReturnMissingNullable:OFF
-              <!--
+                --> -Xep:ReturnMissingNullable:OFF <!--
                 Disabled ErrorProne rule:
-                -->
-              -Xep:CannotMockFinalMethod:OFF
-              <!--
+                --> -Xep:CannotMockFinalMethod:OFF <!--
                 Disabled ErrorProne rule:
-                -->
-              -Xep:Java8ApiChecker:OFF
-              <!--
+                --> -Xep:Java8ApiChecker:OFF <!--
                 Disabled ErrorProne rule:
-                -->
-              -Xep:ImmutableMemberCollection:OFF
-              <!--
+                --> -Xep:ImmutableMemberCollection:OFF <!--
                 Disabled ErrorProne rule:
-                -->
-              -Xep:PreferJavaTimeOverload:OFF
-              <!--
+                --> -Xep:PreferJavaTimeOverload:OFF <!--
                 Disabled ErrorProne rule:
-                -->
-              -Xep:EqualsGetClass:OFF
-              <!--
+                --> -Xep:EqualsGetClass:OFF <!--
                 Disabled ErrorProne rule:
-                -->
-              -Xep:AndroidJdkLibsChecker:OFF
-              <!--
+                --> -Xep:AndroidJdkLibsChecker:OFF <!--
                 Disabled ErrorProne rule:
-                -->
-              -Xep:Java7ApiChecker:OFF
-              <!--
+                --> -Xep:Java7ApiChecker:OFF <!--
                 Disabled ErrorProne rule:
-                -->
-              -Xep:Var:OFF
-              <!--
+                --> -Xep:Var:OFF <!--
                 Disabled ErrorProne rule:
-                -->
-              -Xep:PrivateConstructorForUtilityClass:OFF
-              <!--
+                --> -Xep:PrivateConstructorForUtilityClass:OFF <!--
                 Disabled ErrorProne rule:
-                -->
-              -Xep:MethodCanBeStatic:OFF
-              <!--
+                --> -Xep:MethodCanBeStatic:OFF <!--
                 Disabled ErrorProne rule:
-                -->
-              -Xep:WildcardImport:OFF
-              <!--
+                --> -Xep:WildcardImport:OFF <!--
                 Disabled ErrorProne rule:
-                -->
-              -Xep:ThrowsUncheckedException:OFF
-              <!--
+                --> -Xep:ThrowsUncheckedException:OFF <!--
                 Disabled ErrorProne rule:
-                -->
-              -Xep:UnusedMethod:OFF
-              <!--
+                --> -Xep:UnusedMethod:OFF <!--
                 Disabled ErrorProne rule:
-                -->
-              -Xep:BooleanParameter:OFF
-              <!--
+                --> -Xep:BooleanParameter:OFF <!--
                 Disabled ErrorProne rule:
-                -->
-              -Xep:UnnecessaryFinal:OFF
-              <!--
+                --> -Xep:UnnecessaryFinal:OFF <!--
                 Disabled ErrorProne rule:
-                -->
-              -Xep:MustBeClosedChecker:OFF
-              <!--
-                Disabled ErrorProne rule:
-                -->
-              -Xep:NullableDereference:OFF
+                --> -Xep:NullableDereference:OFF
             </arg>
             <!-- The Error Prone plugin makes certain
                 assumptions about the state of the AST at the
