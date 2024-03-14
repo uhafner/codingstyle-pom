@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>edu.hm.hafner</groupId>
   <artifactId>codingstyle-pom</artifactId>
-  <version>3.45.0-SNAPSHOT</version>
+  <version>4.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Java coding style POM</name>
-  <description>
-    Each Java project should follow a given coding style. I.e., all contributions to the source code should use the same
+  <description>Each Java project should follow a given coding style. I.e., all contributions to the source code should use the same
     formatting rules, design principles, code patterns, idioms, etc. I published such a coding style in my
     GitHub project codingstyle (https://github.com/uhafner/codingstyle) - I am using this coding style in my lectures
     about software development at Munich University of Applied Sciences and in all of my open source projects.
 
     If you want to use this coding style as well, you can use this Maven POM as parent of your own POM. Then you
-    get the configuration several static analysis and testing tools for free.
-  </description>
+    get the configuration several static analysis and testing tools for free.</description>
   <url>https://www.cs.hm.edu/die_fakultaet/ansprechpartner/professoren/hafner/index.de.html</url>
   <licenses>
     <license>
@@ -32,8 +29,8 @@
 
   <developers>
     <developer>
-      <name>Ullrich Hafner</name>
       <id>uhafner</id>
+      <name>Ullrich Hafner</name>
       <email>ullrich.hafner@hm.edu</email>
       <organization>Munich University of Applied Sciences</organization>
       <organizationUrl>https://www.hm.edu/en/index.en.html</organizationUrl>
@@ -43,18 +40,18 @@
   <scm>
     <connection>scm:git:https://github.com/uhafner/codingstyle-pom.git</connection>
     <developerConnection>scm:git:git@github.com:uhafner/codingstyle-pom.git</developerConnection>
-    <url>https://github.com/uhafner/codingstyle-pom</url>
     <tag>HEAD</tag>
+    <url>https://github.com/uhafner/codingstyle-pom</url>
   </scm>
   <distributionManagement>
-    <snapshotRepository>
-      <id>ossrh</id>
-      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-    </snapshotRepository>
     <repository>
       <id>ossrh</id>
       <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
   </distributionManagement>
 
   <properties>
@@ -63,8 +60,8 @@
     <java.version>11</java.version>
     <module.name>undefined</module.name>
 
-    <codingstyle.config.version>3.42.0</codingstyle.config.version>
-    <codingstyle.library.version>3.42.0</codingstyle.library.version>
+    <codingstyle.config.version>4.0.1</codingstyle.config.version>
+    <codingstyle.library.version>4.0.1</codingstyle.library.version>
 
     <!-- Project Dependencies Configuration -->
     <spotbugs.version>4.8.3</spotbugs.version>
@@ -96,7 +93,7 @@
     <maven-failsafe-plugin.version>3.2.5</maven-failsafe-plugin.version>
     <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
     <maven-pmd-plugin.version>3.21.2</maven-pmd-plugin.version>
-    <pmd.version>6.55.0</pmd.version>
+    <pmd.version>7.0.0-rc4</pmd.version>
     <maven-checkstyle-plugin.version>3.3.1</maven-checkstyle-plugin.version>
     <checkstyle.version>10.14.1</checkstyle.version>
     <spotbugs-maven-plugin.version>4.8.3.1</spotbugs-maven-plugin.version>
@@ -319,13 +316,6 @@
           <groupId>org.pitest</groupId>
           <artifactId>pitest-maven</artifactId>
           <version>${maven-pitest-plugin.version}</version>
-          <dependencies>
-            <dependency>
-              <groupId>org.pitest</groupId>
-              <artifactId>pitest-junit5-plugin</artifactId>
-              <version>${pitest-junit5-plugin.version}</version>
-            </dependency>
-          </dependencies>
           <configuration>
             <outputFormats>XML,HTML</outputFormats>
             <excludedTestClasses>
@@ -337,6 +327,13 @@
               <param>*toString</param>
             </excludedMethods>
           </configuration>
+          <dependencies>
+            <dependency>
+              <groupId>org.pitest</groupId>
+              <artifactId>pitest-junit5-plugin</artifactId>
+              <version>${pitest-junit5-plugin.version}</version>
+            </dependency>
+          </dependencies>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -367,6 +364,13 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-enforcer-plugin</artifactId>
           <version>${maven-enforcer-plugin.version}</version>
+          <dependencies>
+            <dependency>
+              <groupId>org.codehaus.mojo</groupId>
+              <artifactId>extra-enforcer-rules</artifactId>
+              <version>1.8.0</version>
+            </dependency>
+          </dependencies>
           <executions>
             <execution>
               <id>enforce-require-property-diverges</id>
@@ -384,25 +388,11 @@
               </configuration>
             </execution>
           </executions>
-          <dependencies>
-            <dependency>
-              <groupId>org.codehaus.mojo</groupId>
-              <artifactId>extra-enforcer-rules</artifactId>
-              <version>1.8.0</version>
-            </dependency>
-          </dependencies>
         </plugin>
         <plugin>
           <groupId>org.assertj</groupId>
           <artifactId>assertj-assertions-generator-maven-plugin</artifactId>
           <version>${assertj-assertions-generator-maven-plugin.version}</version>
-          <executions>
-            <execution>
-              <goals>
-                <goal>generate-assertions</goal>
-              </goals>
-            </execution>
-          </executions>
           <configuration>
             <quiet>true</quiet>
             <cleanTargetDir>true</cleanTargetDir>
@@ -426,6 +416,13 @@
               <version>4.13.2</version>
             </dependency>
           </dependencies>
+          <executions>
+            <execution>
+              <goals>
+                <goal>generate-assertions</goal>
+              </goals>
+            </execution>
+          </executions>
         </plugin>
         <plugin>
           <groupId>org.openrewrite.maven</groupId>
@@ -605,8 +602,6 @@
                 Disabled ErrorProne rule:
                 --> -Xep:UnnecessaryFinal:OFF <!--
                 Disabled ErrorProne rule:
-                --> -Xep:MustBeClosedChecker:OFF <!--
-                Disabled ErrorProne rule:
                 --> -Xep:NullableDereference:OFF
             </arg>
             <!-- The Error Prone plugin makes certain
@@ -663,6 +658,13 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${maven-surefire-plugin.version}</version>
+        <configuration>
+          <trimStackTrace>false</trimStackTrace>
+          <!-- SUREFIRE-1798 -->
+          <excludes>
+            <exclude>**/*ITest.*</exclude>
+          </excludes>
+        </configuration>
         <dependencies>
           <dependency>
             <groupId>com.tngtech.archunit</groupId>
@@ -670,12 +672,6 @@
             <version>${archunit.version}</version>
           </dependency>
         </dependencies>
-        <configuration>
-          <trimStackTrace>false</trimStackTrace> <!-- SUREFIRE-1798 -->
-          <excludes>
-            <exclude>**/*ITest.*</exclude>
-          </excludes>
-        </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-failsafe-plugin</artifactId>
@@ -713,31 +709,17 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-pmd-plugin</artifactId>
         <version>${maven-pmd-plugin.version}</version>
-        <executions>
-          <execution>
-            <id>run-pmd</id>
-            <goals>
-              <goal>pmd</goal>
-              <goal>cpd</goal>
-            </goals>
-            <phase>verify</phase>
-          </execution>
-        </executions>
         <configuration>
           <linkXRef>false</linkXRef>
           <failOnViolation>false</failOnViolation>
-          <rulesets>
-            <ruleset>pmd-configuration.xml</ruleset>
-          </rulesets>
           <targetJdk>${java.version}</targetJdk>
-          <includeTests>true</includeTests>
-          <minimumTokens>50</minimumTokens>
-          <excludeRoots>
-            <excludeRoot>target/generated-test-sources/test-annotations</excludeRoot>
-            <excludeRoot>target/generated-test-sources/assertj-assertions</excludeRoot>
-          </excludeRoots>
         </configuration>
         <dependencies>
+          <dependency>
+            <groupId>net.sourceforge.pmd</groupId>
+            <artifactId>pmd-compat6</artifactId>
+            <version>${pmd.version}</version>
+          </dependency>
           <dependency>
             <groupId>net.sourceforge.pmd</groupId>
             <artifactId>pmd-core</artifactId>
@@ -749,32 +731,93 @@
             <version>${pmd.version}</version>
           </dependency>
           <dependency>
+            <groupId>net.sourceforge.pmd</groupId>
+            <artifactId>pmd-javascript</artifactId>
+            <version>${pmd.version}</version>
+          </dependency>
+          <dependency>
+            <groupId>net.sourceforge.pmd</groupId>
+            <artifactId>pmd-jsp</artifactId>
+            <version>${pmd.version}</version>
+          </dependency>
+          <dependency>
             <groupId>edu.hm.hafner</groupId>
             <artifactId>codingstyle</artifactId>
             <version>${codingstyle.config.version}</version>
             <classifier>config</classifier>
           </dependency>
         </dependencies>
+        <executions>
+          <execution>
+            <id>run-pmd-java</id>
+            <goals>
+              <goal>pmd</goal>
+              <goal>cpd</goal>
+            </goals>
+            <phase>verify</phase>
+            <configuration>
+              <targetDirectory>${project.build.directory}/pmd-java</targetDirectory>
+              <rulesets>
+                <ruleset>pmd-java-configuration.xml</ruleset>
+              </rulesets>
+              <includeTests>false</includeTests>
+              <minimumTokens>50</minimumTokens>
+            </configuration>
+          </execution>
+          <execution>
+            <id>run-pmd-tests</id>
+            <goals>
+              <goal>pmd</goal>
+              <goal>cpd</goal>
+            </goals>
+            <phase>verify</phase>
+            <configuration>
+              <targetDirectory>${project.build.directory}/pmd-tests</targetDirectory>
+              <rulesets>
+                <ruleset>pmd-tests-configuration.xml</ruleset>
+              </rulesets>
+              <includeTests>true</includeTests>
+              <minimumTokens>100</minimumTokens>
+              <excludeRoots>
+                <excludeRoot>src/main/java</excludeRoot>
+                <excludeRoot>${project.build.directory}/generated-test-sources/test-annotations</excludeRoot>
+                <excludeRoot>${project.build.directory}/generated-test-sources/assertj-assertions</excludeRoot>
+              </excludeRoots>
+            </configuration>
+          </execution>
+          <execution>
+            <id>run-pmd-javascript</id>
+            <goals>
+              <goal>pmd</goal>
+            </goals>
+            <phase>verify</phase>
+            <configuration>
+              <targetDirectory>${project.build.directory}/pmd-javascript</targetDirectory>
+              <rulesets>
+                <ruleset>pmd-javascript-configuration.xml</ruleset>
+              </rulesets>
+              <includeTests>false</includeTests>
+              <language>javascript</language>
+              <compileSourceRoots>
+                <compileSourceRoot>${basedir}/src/main/resources</compileSourceRoot>
+                <compileSourceRoot>${basedir}/src/main/webapp/js</compileSourceRoot>
+              </compileSourceRoots>
+              <includes>
+                <include>**/*.js</include>
+              </includes>
+            </configuration>
+          </execution>
+
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
         <version>${maven-checkstyle-plugin.version}</version>
-        <executions>
-          <execution>
-            <id>run-checkstyle</id>
-            <goals>
-              <goal>checkstyle</goal>
-            </goals>
-            <phase>verify</phase>
-          </execution>
-        </executions>
         <configuration>
           <linkXRef>false</linkXRef>
-          <excludes>**/*Assert*.java,**/*_jmh*,**/module-info.java</excludes>
-          <failOnViolation>false</failOnViolation>
-          <configLocation>checkstyle-configuration.xml</configLocation>
-          <includeTestSourceDirectory>true</includeTestSourceDirectory>
+          <excludeGeneratedSources>true</excludeGeneratedSources>
+          <failsOnError>false</failsOnError>
         </configuration>
         <dependencies>
           <dependency>
@@ -789,20 +832,39 @@
             <classifier>config</classifier>
           </dependency>
         </dependencies>
+        <executions>
+          <execution>
+            <id>run-checkstyle-java</id>
+            <goals>
+              <goal>checkstyle</goal>
+            </goals>
+            <phase>verify</phase>
+            <configuration>
+              <excludes>**/module-info.java</excludes>
+              <includeTestSourceDirectory>false</includeTestSourceDirectory>
+              <configLocation>checkstyle-java-configuration.xml</configLocation>
+              <outputFile>${project.build.directory}/checkstyle-java/checkstyle-result.xml</outputFile>
+            </configuration>
+          </execution>
+          <execution>
+            <id>run-checkstyle-tests</id>
+            <goals>
+              <goal>checkstyle</goal>
+            </goals>
+            <phase>verify</phase>
+            <configuration>
+              <excludes>**/*Assert*.java,**/*_jmh*,**/module-info.java</excludes>
+              <includeTestSourceDirectory>true</includeTestSourceDirectory>
+              <configLocation>checkstyle-tests-configuration.xml</configLocation>
+              <outputFile>${project.build.directory}/checkstyle-tests/checkstyle-result.xml</outputFile>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>com.github.spotbugs</groupId>
         <artifactId>spotbugs-maven-plugin</artifactId>
         <version>${spotbugs-maven-plugin.version}</version>
-        <executions>
-          <execution>
-            <id>run-spotbugs</id>
-            <goals>
-              <goal>spotbugs</goal>
-            </goals>
-            <phase>verify</phase>
-          </execution>
-        </executions>
         <configuration>
           <failOnError>false</failOnError>
           <xmlOutput>true</xmlOutput>
@@ -833,6 +895,15 @@
             <version>${spotbugs.version}</version>
           </dependency>
         </dependencies>
+        <executions>
+          <execution>
+            <id>run-spotbugs</id>
+            <goals>
+              <goal>spotbugs</goal>
+            </goals>
+            <phase>verify</phase>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.jacoco</groupId>
@@ -847,10 +918,10 @@
           </execution>
           <execution>
             <id>report</id>
-            <phase>verify</phase>
             <goals>
               <goal>report</goal>
             </goals>
+            <phase>verify</phase>
           </execution>
         </executions>
       </plugin>
@@ -858,18 +929,6 @@
         <groupId>org.revapi</groupId>
         <artifactId>revapi-maven-plugin</artifactId>
         <version>${revapi-maven-plugin.version}</version>
-        <dependencies>
-          <dependency>
-            <groupId>org.revapi</groupId>
-            <artifactId>revapi-java</artifactId>
-            <version>${revapi-java.version}</version>
-          </dependency>
-          <dependency>
-            <groupId>org.revapi</groupId>
-            <artifactId>revapi-reporter-json</artifactId>
-            <version>${revapi-reporter-json-version}</version>
-          </dependency>
-        </dependencies>
         <configuration>
           <versionFormat>[-0-9.]*</versionFormat>
           <failBuildOnProblemsFound>true</failBuildOnProblemsFound>
@@ -912,6 +971,18 @@
             </revapi.reporter.json>
           </analysisConfiguration>
         </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.revapi</groupId>
+            <artifactId>revapi-java</artifactId>
+            <version>${revapi-java.version}</version>
+          </dependency>
+          <dependency>
+            <groupId>org.revapi</groupId>
+            <artifactId>revapi-reporter-json</artifactId>
+            <version>${revapi-reporter-json-version}</version>
+          </dependency>
+        </dependencies>
         <executions>
           <execution>
             <id>run-revapi</id>
@@ -978,10 +1049,10 @@
             </configuration>
             <executions>
               <execution>
-                <phase>verify</phase>
                 <goals>
                   <goal>graph</goal>
                 </goals>
+                <phase>verify</phase>
               </execution>
             </executions>
           </plugin>
@@ -999,10 +1070,10 @@
             <executions>
               <execution>
                 <id>sign-artifacts</id>
-                <phase>verify</phase>
                 <goals>
                   <goal>sign</goal>
                 </goals>
+                <phase>verify</phase>
               </execution>
             </executions>
           </plugin>
