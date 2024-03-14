@@ -5,7 +5,7 @@
 
   <groupId>edu.hm.hafner</groupId>
   <artifactId>codingstyle-pom</artifactId>
-  <version>3.45.0-SNAPSHOT</version>
+  <version>4.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Java coding style POM</name>
@@ -63,8 +63,8 @@
     <java.version>11</java.version>
     <module.name>undefined</module.name>
 
-    <codingstyle.config.version>3.42.0</codingstyle.config.version>
-    <codingstyle.library.version>3.42.0</codingstyle.library.version>
+    <codingstyle.config.version>4.0.0</codingstyle.config.version>
+    <codingstyle.library.version>4.0.0</codingstyle.library.version>
 
     <!-- Project Dependencies Configuration -->
     <spotbugs.version>4.8.3</spotbugs.version>
@@ -713,31 +713,17 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-pmd-plugin</artifactId>
         <version>${maven-pmd-plugin.version}</version>
-        <executions>
-          <execution>
-            <id>run-pmd</id>
-            <goals>
-              <goal>pmd</goal>
-              <goal>cpd</goal>
-            </goals>
-            <phase>verify</phase>
-          </execution>
-        </executions>
         <configuration>
           <linkXRef>false</linkXRef>
           <failOnViolation>false</failOnViolation>
-          <rulesets>
-            <ruleset>pmd-configuration.xml</ruleset>
-          </rulesets>
           <targetJdk>${java.version}</targetJdk>
-          <includeTests>true</includeTests>
-          <minimumTokens>50</minimumTokens>
-          <excludeRoots>
-            <excludeRoot>target/generated-test-sources/test-annotations</excludeRoot>
-            <excludeRoot>target/generated-test-sources/assertj-assertions</excludeRoot>
-          </excludeRoots>
         </configuration>
         <dependencies>
+          <dependency>
+            <groupId>net.sourceforge.pmd</groupId>
+            <artifactId>pmd-compat6</artifactId>
+            <version>${pmd.version}</version>
+          </dependency>
           <dependency>
             <groupId>net.sourceforge.pmd</groupId>
             <artifactId>pmd-core</artifactId>
@@ -749,32 +735,93 @@
             <version>${pmd.version}</version>
           </dependency>
           <dependency>
+            <groupId>net.sourceforge.pmd</groupId>
+            <artifactId>pmd-javascript</artifactId>
+            <version>${pmd.version}</version>
+          </dependency>
+          <dependency>
+            <groupId>net.sourceforge.pmd</groupId>
+            <artifactId>pmd-jsp</artifactId>
+            <version>${pmd.version}</version>
+          </dependency>
+          <dependency>
             <groupId>edu.hm.hafner</groupId>
             <artifactId>codingstyle</artifactId>
             <version>${codingstyle.config.version}</version>
             <classifier>config</classifier>
           </dependency>
         </dependencies>
+        <executions>
+          <execution>
+            <id>run-pmd-java</id>
+            <goals>
+              <goal>pmd</goal>
+              <goal>cpd</goal>
+            </goals>
+            <phase>verify</phase>
+            <configuration>
+              <targetDirectory>${project.build.directory}/pmd-java</targetDirectory>
+              <rulesets>
+                <ruleset>pmd-java-configuration.xml</ruleset>
+              </rulesets>
+              <includeTests>false</includeTests>
+              <minimumTokens>50</minimumTokens>
+            </configuration>
+          </execution>
+          <execution>
+            <id>run-pmd-tests</id>
+            <goals>
+              <goal>pmd</goal>
+              <goal>cpd</goal>
+            </goals>
+            <phase>verify</phase>
+            <configuration>
+              <targetDirectory>${project.build.directory}/pmd-tests</targetDirectory>
+              <rulesets>
+                <ruleset>pmd-tests-configuration.xml</ruleset>
+              </rulesets>
+              <includeTests>true</includeTests>
+              <minimumTokens>100</minimumTokens>
+              <excludeRoots>
+                <excludeRoot>src/main/java</excludeRoot>
+                <excludeRoot>${project.build.directory}/generated-test-sources/test-annotations</excludeRoot>
+                <excludeRoot>${project.build.directory}/generated-test-sources/assertj-assertions</excludeRoot>
+              </excludeRoots>
+            </configuration>
+          </execution>
+          <execution>
+            <id>run-pmd-javascript</id>
+            <goals>
+              <goal>pmd</goal>
+            </goals>
+            <phase>verify</phase>
+            <configuration>
+              <targetDirectory>${project.build.directory}/pmd-javascript</targetDirectory>
+              <rulesets>
+                <ruleset>pmd-javascript-configuration.xml</ruleset>
+              </rulesets>
+              <includeTests>false</includeTests>
+              <language>javascript</language>
+              <compileSourceRoots>
+                <compileSourceRoot>${basedir}/src/main/resources</compileSourceRoot>
+                <compileSourceRoot>${basedir}/src/main/webapp/js</compileSourceRoot>
+              </compileSourceRoots>
+              <includes>
+                <include>**/*.js</include>
+              </includes>
+            </configuration>
+          </execution>
+
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
         <version>${maven-checkstyle-plugin.version}</version>
-        <executions>
-          <execution>
-            <id>run-checkstyle</id>
-            <goals>
-              <goal>checkstyle</goal>
-            </goals>
-            <phase>verify</phase>
-          </execution>
-        </executions>
         <configuration>
           <linkXRef>false</linkXRef>
-          <excludes>**/*Assert*.java,**/*_jmh*,**/module-info.java</excludes>
-          <failOnViolation>false</failOnViolation>
-          <configLocation>checkstyle-configuration.xml</configLocation>
-          <includeTestSourceDirectory>true</includeTestSourceDirectory>
+          <excludeGeneratedSources>true</excludeGeneratedSources>
+          <failsOnError>false</failsOnError>
         </configuration>
         <dependencies>
           <dependency>
@@ -789,6 +836,34 @@
             <classifier>config</classifier>
           </dependency>
         </dependencies>
+        <executions>
+          <execution>
+            <id>run-checkstyle-java</id>
+            <goals>
+              <goal>checkstyle</goal>
+            </goals>
+            <phase>verify</phase>
+            <configuration>
+              <excludes>**/module-info.java</excludes>
+              <includeTestSourceDirectory>false</includeTestSourceDirectory>
+              <configLocation>checkstyle-java-configuration.xml</configLocation>
+              <outputFile>${project.build.directory}/checkstyle-java/checkstyle-result.xml</outputFile>
+            </configuration>
+          </execution>
+          <execution>
+            <id>run-checkstyle-tests</id>
+            <goals>
+              <goal>checkstyle</goal>
+            </goals>
+            <phase>verify</phase>
+            <configuration>
+              <excludes>**/*Assert*.java,**/*_jmh*,**/module-info.java</excludes>
+              <includeTestSourceDirectory>true</includeTestSourceDirectory>
+              <configLocation>checkstyle-tests-configuration.xml</configLocation>
+              <outputFile>${project.build.directory}/checkstyle-tests/checkstyle-result.xml</outputFile>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>com.github.spotbugs</groupId>
