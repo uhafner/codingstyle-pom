@@ -4,7 +4,7 @@
 
   <groupId>edu.hm.hafner</groupId>
   <artifactId>codingstyle-pom</artifactId>
-  <version>4.1.0-SNAPSHOT</version>
+  <version>4.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Java coding style POM</name>
@@ -601,6 +601,8 @@
                 --> -Xep:BooleanParameter:OFF <!--
                 Disabled ErrorProne rule:
                 --> -Xep:UnnecessaryFinal:OFF <!--
+                Disabled ErrorProne rule:
+                --> -Xep:MustBeClosedChecker:OFF <!--
                 Disabled ErrorProne rule:
                 --> -Xep:NullableDereference:OFF
             </arg>
