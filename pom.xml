@@ -67,7 +67,7 @@
     <spotbugs.version>4.8.3</spotbugs.version>
     <streamex.version>0.8.2</streamex.version>
     <commons.lang.version>3.14.0</commons.lang.version>
-    <commons.io.version>2.15.1</commons.io.version>
+    <commons.io.version>2.16.0</commons.io.version>
     <byte-buddy.version>1.14.12</byte-buddy.version>
     <slf4j.version>2.0.12</slf4j.version>
     <commons-logging.version>1.3.0</commons-logging.version>
