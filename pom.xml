@@ -114,6 +114,7 @@
     <maven-dependency-plugin.version>3.6.1</maven-dependency-plugin.version>
     <depgraph-maven-plugin.version>4.0.3</depgraph-maven-plugin.version>
     <sortpom-maven-plugin.version>3.4.1</sortpom-maven-plugin.version>
+    <git-commit-id-maven-plugin.version>8.0.2</git-commit-id-maven-plugin.version>
 
     <!-- OpenRewrite versions   -->
     <rewrite-maven-plugin.version>5.27.0</rewrite-maven-plugin.version>
@@ -473,6 +474,29 @@
       </plugins>
     </pluginManagement>
     <plugins>
+      <plugin>
+        <groupId>io.github.git-commit-id</groupId>
+        <artifactId>git-commit-id-maven-plugin</artifactId>
+        <version>${git-commit-id-maven-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>get-the-git-infos</id>
+            <goals>
+              <goal>revision</goal>
+            </goals>
+            <phase>initialize</phase>
+          </execution>
+        </executions>
+        <configuration>
+          <generateGitPropertiesFile>true</generateGitPropertiesFile>
+          <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
+          <includeOnlyProperties>
+            <includeOnlyProperty>^git.build.(time|version)$</includeOnlyProperty>
+            <includeOnlyProperty>^git.commit.id.(abbrev|full)$</includeOnlyProperty>
+          </includeOnlyProperties>
+          <commitIdGenerationMode>full</commitIdGenerationMode>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
