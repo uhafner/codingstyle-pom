@@ -60,8 +60,8 @@
     <java.version>11</java.version>
     <module.name>undefined</module.name>
 
-    <codingstyle.config.version>4.1.0</codingstyle.config.version>
-    <codingstyle.library.version>4.1.0</codingstyle.library.version>
+    <codingstyle.config.version>4.2.0</codingstyle.config.version>
+    <codingstyle.library.version>4.2.0</codingstyle.library.version>
 
     <!-- Project Dependencies Configuration -->
     <spotbugs.version>4.8.3</spotbugs.version>
