@@ -78,7 +78,7 @@
     <mockito.version>5.11.0</mockito.version>
     <assertj.version>3.25.3</assertj.version>
     <archunit.version>1.2.1</archunit.version>
-    <equalsverifier.version>3.16</equalsverifier.version>
+    <equalsverifier.version>3.16.1</equalsverifier.version>
 
     <!-- Maven Plug-ins Configuration -->
     <maven-deploy-plugin.version>3.1.1</maven-deploy-plugin.version>
