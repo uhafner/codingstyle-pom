@@ -15,7 +15,7 @@
 
     If you want to use this coding style as well, you can use this Maven POM as parent of your own POM. Then you
     get the configuration several static analysis and testing tools for free.</description>
-  <url>https://www.cs.hm.edu/die_fakultaet/ansprechpartner/professoren/hafner/index.de.html</url>
+  <url>https://cs.hm.edu/~hafner</url>
   <licenses>
     <license>
       <name>MIT license</name>
