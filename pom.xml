@@ -40,7 +40,7 @@
   <scm>
     <connection>scm:git:https://github.com/uhafner/codingstyle-pom.git</connection>
     <developerConnection>scm:git:git@github.com:uhafner/codingstyle-pom.git</developerConnection>
-    <tag>v4.5.0</tag>
+    <tag>HEAD</tag>
     <url>https://github.com/uhafner/codingstyle-pom</url>
   </scm>
   <distributionManagement>
@@ -65,20 +65,20 @@
 
     <!-- Project Dependencies Configuration -->
     <spotbugs.version>4.8.5</spotbugs.version>
-    <streamex.version>0.8.2</streamex.version>
     <commons.lang.version>3.14.0</commons.lang.version>
     <commons.io.version>2.16.1</commons.io.version>
     <byte-buddy.version>1.14.14</byte-buddy.version>
     <slf4j.version>2.0.13</slf4j.version>
+    <streamex.version>0.8.2</streamex.version>
     <commons-logging.version>1.3.1</commons-logging.version>
 
     <!-- Project Test Dependencies Configuration -->
+    <equalsverifier.version>3.16.1</equalsverifier.version>
     <junit.version>5.10.2</junit.version>
     <junit-pioneer.version>2.2.0</junit-pioneer.version>
     <mockito.version>5.11.0</mockito.version>
     <assertj.version>3.25.3</assertj.version>
     <archunit.version>1.3.0</archunit.version>
-    <equalsverifier.version>3.16.1</equalsverifier.version>
 
     <!-- Maven Plug-ins Configuration -->
     <maven-deploy-plugin.version>3.1.2</maven-deploy-plugin.version>
@@ -130,28 +130,14 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>org.junit</groupId>
-        <artifactId>junit-bom</artifactId>
-        <version>${junit.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.mockito</groupId>
-        <artifactId>mockito-bom</artifactId>
-        <version>${mockito.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
+        <groupId>edu.hm.hafner</groupId>
+        <artifactId>codingstyle</artifactId>
+        <version>${codingstyle.config.version}</version>
       </dependency>
       <dependency>
         <groupId>com.uber.nullaway</groupId>
         <artifactId>nullaway</artifactId>
         <version>${nullaway.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>edu.hm.hafner</groupId>
-        <artifactId>codingstyle</artifactId>
-        <version>${codingstyle.config.version}</version>
       </dependency>
       <dependency>
         <groupId>net.bytebuddy</groupId>
@@ -168,31 +154,26 @@
         <artifactId>commons-logging</artifactId>
         <version>${commons-logging.version}</version>
       </dependency>
+
+      <!-- Test Dependencies -->
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>${junit.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-bom</artifactId>
+        <version>${mockito.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
   <dependencies>
-    <dependency>
-      <groupId>com.github.spotbugs</groupId>
-      <artifactId>spotbugs-annotations</artifactId>
-      <version>${spotbugs.version}</version>
-      <exclusions>
-        <exclusion>
-          <groupId>com.google.code.findbugs</groupId>
-          <artifactId>jsr305</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>com.google.errorprone</groupId>
-      <artifactId>error_prone_annotations</artifactId>
-      <version>${error-prone.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>one.util</groupId>
-      <artifactId>streamex</artifactId>
-      <version>${streamex.version}</version>
-    </dependency>
     <dependency>
       <groupId>edu.hm.hafner</groupId>
       <artifactId>codingstyle</artifactId>
@@ -217,6 +198,22 @@
       </exclusions>
     </dependency>
     <dependency>
+      <groupId>com.github.spotbugs</groupId>
+      <artifactId>spotbugs-annotations</artifactId>
+      <version>${spotbugs.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>com.google.code.findbugs</groupId>
+          <artifactId>jsr305</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>com.google.errorprone</groupId>
+      <artifactId>error_prone_annotations</artifactId>
+      <version>${error-prone.version}</version>
+    </dependency>
+    <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
       <version>${commons.lang.version}</version>
@@ -226,8 +223,19 @@
       <artifactId>commons-io</artifactId>
       <version>${commons.io.version}</version>
     </dependency>
+    <dependency>
+      <groupId>one.util</groupId>
+      <artifactId>streamex</artifactId>
+      <version>${streamex.version}</version>
+    </dependency>
 
     <!-- Test Dependencies -->
+    <dependency>
+      <groupId>nl.jqno.equalsverifier</groupId>
+      <artifactId>equalsverifier</artifactId>
+      <version>${equalsverifier.version}</version>
+      <scope>test</scope>
+    </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
@@ -275,12 +283,6 @@
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
       <version>${slf4j.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>nl.jqno.equalsverifier</groupId>
-      <artifactId>equalsverifier</artifactId>
-      <version>${equalsverifier.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -478,15 +480,6 @@
         <groupId>io.github.git-commit-id</groupId>
         <artifactId>git-commit-id-maven-plugin</artifactId>
         <version>${git-commit-id-maven-plugin.version}</version>
-        <executions>
-          <execution>
-            <id>get-the-git-infos</id>
-            <goals>
-              <goal>revision</goal>
-            </goals>
-            <phase>initialize</phase>
-          </execution>
-        </executions>
         <configuration>
           <generateGitPropertiesFile>true</generateGitPropertiesFile>
           <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
@@ -496,6 +489,15 @@
           </includeOnlyProperties>
           <commitIdGenerationMode>full</commitIdGenerationMode>
         </configuration>
+        <executions>
+          <execution>
+            <id>get-the-git-infos</id>
+            <goals>
+              <goal>revision</goal>
+            </goals>
+            <phase>initialize</phase>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -542,6 +544,7 @@
         </configuration>
       </plugin>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>${maven-compiler-plugin.version}</version>
         <configuration>
@@ -563,6 +566,7 @@
               <version>${mockito.version}</version>
             </path>
           </annotationProcessorPaths>
+          <?SORTPOM IGNORE?>
           <compilerArgs>
             <arg>-Xlint:-varargs</arg>
             <arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED</arg>
@@ -638,6 +642,7 @@
                 https://bugs.openjdk.java.net/browse/JDK-8155674. -->
             <arg>-XDcompilePolicy=simple</arg>
           </compilerArgs>
+          <?SORTPOM RESUME?>
           <fork>true</fork>
           <showWarnings>true</showWarnings>
         </configuration>
@@ -701,6 +706,7 @@
         </dependencies>
       </plugin>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
         <version>${maven-failsafe-plugin.version}</version>
         <configuration>
@@ -738,8 +744,8 @@
         <version>${maven-pmd-plugin.version}</version>
         <configuration>
           <linkXRef>false</linkXRef>
-          <failOnViolation>false</failOnViolation>
           <targetJdk>${java.version}</targetJdk>
+          <skip>true</skip>
         </configuration>
         <dependencies>
           <dependency>
@@ -780,6 +786,7 @@
               </rulesets>
               <includeTests>false</includeTests>
               <minimumTokens>50</minimumTokens>
+              <skip>false</skip>
             </configuration>
           </execution>
           <execution>
@@ -802,6 +809,7 @@
                 <excludeRoot>${project.build.directory}/generated-test-sources/test-annotations</excludeRoot>
                 <excludeRoot>${project.build.directory}/generated-test-sources/assertj-assertions</excludeRoot>
               </excludeRoots>
+              <skip>false</skip>
             </configuration>
           </execution>
           <execution>
@@ -876,7 +884,7 @@
               <includeTestSourceDirectory>true</includeTestSourceDirectory>
               <configLocation>checkstyle-tests-configuration.xml</configLocation>
               <outputFile>${project.build.directory}/checkstyle-tests/checkstyle-result.xml</outputFile>
-              <sourceDirectories />
+              <sourceDirectories></sourceDirectories>
             </configuration>
           </execution>
         </executions>
@@ -886,9 +894,10 @@
         <artifactId>spotbugs-maven-plugin</artifactId>
         <version>${spotbugs-maven-plugin.version}</version>
         <configuration>
-          <failOnError>false</failOnError>
+          <failOnError>true</failOnError>
           <xmlOutput>true</xmlOutput>
           <threshold>Low</threshold>
+          <failThreshold>Low</failThreshold>
           <effort>Max</effort>
           <relaxed>false</relaxed>
           <fork>true</fork>
@@ -920,6 +929,7 @@
             <id>run-spotbugs</id>
             <goals>
               <goal>spotbugs</goal>
+              <goal>check</goal>
             </goals>
             <phase>verify</phase>
           </execution>
@@ -1020,14 +1030,23 @@
     <profile>
       <id>skip</id>
       <properties>
+        <checkstyle.skip>true</checkstyle.skip>
+        <gpg.skip>true</gpg.skip>
         <maven.javadoc.skip>true</maven.javadoc.skip>
         <pmd.skip>true</pmd.skip>
-        <spotbugs.skip>true</spotbugs.skip>
-        <checkstyle.skip>true</checkstyle.skip>
-        <skipTests>true</skipTests>
-        <skipITs>true</skipITs>
         <revapi.skip>true</revapi.skip>
-        <gpg.skip>true</gpg.skip>
+        <skipITs>true</skipITs>
+        <skipTests>true</skipTests>
+        <spotbugs.skip>true</spotbugs.skip>
+      </properties>
+    </profile>
+    <profile>
+      <id>ci</id>
+      <properties>
+        <maven.test.failure.ignore>true</maven.test.failure.ignore>
+        <checkstyle.failOnViolation>false</checkstyle.failOnViolation>
+        <pmd.failOnViolation>false</pmd.failOnViolation>
+        <spotbugs.maxAllowedViolations>10000000</spotbugs.maxAllowedViolations>
       </properties>
     </profile>
     <profile>
