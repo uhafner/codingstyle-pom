@@ -60,8 +60,10 @@
     <java.version>11</java.version>
     <module.name>undefined</module.name>
 
-    <codingstyle.config.version>4.8.0</codingstyle.config.version>
-    <codingstyle.library.version>4.8.0</codingstyle.library.version>
+    <pmd.skip>false</pmd.skip>
+
+    <codingstyle.config.version>4.9.0</codingstyle.config.version>
+    <codingstyle.library.version>4.9.0</codingstyle.library.version>
 
     <!-- Project Dependencies Configuration -->
     <spotbugs.version>4.8.5</spotbugs.version>
@@ -786,7 +788,7 @@
               </rulesets>
               <includeTests>false</includeTests>
               <minimumTokens>50</minimumTokens>
-              <skip>false</skip>
+              <skip>${pmd.skip}</skip>
             </configuration>
           </execution>
           <execution>
@@ -809,7 +811,7 @@
                 <excludeRoot>${project.build.directory}/generated-test-sources/test-annotations</excludeRoot>
                 <excludeRoot>${project.build.directory}/generated-test-sources/assertj-assertions</excludeRoot>
               </excludeRoots>
-              <skip>false</skip>
+              <skip>${pmd.skip}</skip>
             </configuration>
           </execution>
           <execution>
@@ -833,6 +835,7 @@
               <includes>
                 <include>**/*.js</include>
               </includes>
+              <skip>${pmd.skip}</skip>
             </configuration>
           </execution>
         </executions>
@@ -894,7 +897,6 @@
         <artifactId>spotbugs-maven-plugin</artifactId>
         <version>${spotbugs-maven-plugin.version}</version>
         <configuration>
-          <failOnError>true</failOnError>
           <xmlOutput>true</xmlOutput>
           <threshold>Low</threshold>
           <failThreshold>Low</failThreshold>
@@ -1046,7 +1048,8 @@
         <maven.test.failure.ignore>true</maven.test.failure.ignore>
         <checkstyle.failOnViolation>false</checkstyle.failOnViolation>
         <pmd.failOnViolation>false</pmd.failOnViolation>
-        <spotbugs.maxAllowedViolations>10000000</spotbugs.maxAllowedViolations>
+        <spotbugs.failOnError>false</spotbugs.failOnError>
+        <gpg.skip>true</gpg.skip>
       </properties>
     </profile>
     <profile>
