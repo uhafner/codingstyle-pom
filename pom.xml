@@ -62,8 +62,8 @@
 
     <pmd.skip>false</pmd.skip>
 
-    <codingstyle.config.version>4.9.0</codingstyle.config.version>
-    <codingstyle.library.version>4.9.0</codingstyle.library.version>
+    <codingstyle.config.version>4.10.0</codingstyle.config.version>
+    <codingstyle.library.version>4.10.0</codingstyle.library.version>
 
     <!-- Project Dependencies Configuration -->
     <spotbugs.version>4.8.5</spotbugs.version>
@@ -930,7 +930,6 @@
           <execution>
             <id>run-spotbugs</id>
             <goals>
-              <goal>spotbugs</goal>
               <goal>check</goal>
             </goals>
             <phase>verify</phase>
