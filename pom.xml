@@ -1054,7 +1054,6 @@
         <pmd.failOnViolation>false</pmd.failOnViolation>
         <spotbugs.failOnError>false</spotbugs.failOnError>
         <gpg.skip>true</gpg.skip>
-        <flatten.flatten.skip>true</flatten.flatten.skip>
       </properties>
     </profile>
     <profile>
