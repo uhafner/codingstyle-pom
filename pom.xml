@@ -84,7 +84,7 @@
 
     <!-- Maven Plug-ins Configuration -->
     <maven-deploy-plugin.version>3.1.2</maven-deploy-plugin.version>
-    <maven-site-plugin.version>3.12.1</maven-site-plugin.version>
+    <maven-site-plugin.version>3.20.0</maven-site-plugin.version>
     <maven-install-plugin.version>3.1.2</maven-install-plugin.version>
     <maven-clean-plugin.version>3.4.0</maven-clean-plugin.version>
     <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
