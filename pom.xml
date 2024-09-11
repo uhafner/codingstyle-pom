@@ -62,8 +62,8 @@
 
     <pmd.skip>false</pmd.skip>
 
-    <codingstyle.config.version>4.10.0</codingstyle.config.version>
-    <codingstyle.library.version>4.10.0</codingstyle.library.version>
+    <codingstyle.config.version>4.12.0</codingstyle.config.version>
+    <codingstyle.library.version>4.12.0</codingstyle.library.version>
 
     <!-- Project Dependencies Configuration -->
     <spotbugs.version>4.8.6</spotbugs.version>
@@ -240,17 +240,7 @@
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.platform</groupId>
-      <artifactId>junit-platform-launcher</artifactId>
+      <artifactId>junit-jupiter</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -604,6 +594,8 @@
                 --> -Xep:NullAway:WARN <!--
                 NullAway configuration:
                 --> -XepOpt:NullAway:AnnotatedPackages=edu.hm.hafner <!--
+                Disabled ErrorProne rule:
+                --> -Xep:YodaCondition:OFF <!--
                 Disabled ErrorProne rule:
                 --> -Xep:ReturnMissingNullable:OFF <!--
                 Disabled ErrorProne rule:
