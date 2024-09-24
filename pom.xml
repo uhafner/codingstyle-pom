@@ -63,8 +63,8 @@
 
     <pmd.skip>false</pmd.skip>
 
-    <codingstyle.config.version>4.13.0</codingstyle.config.version>
-    <codingstyle.library.version>4.13.0</codingstyle.library.version>
+    <codingstyle.config.version>4.14.0</codingstyle.config.version>
+    <codingstyle.library.version>4.14.0</codingstyle.library.version>
 
     <!-- Project Dependencies Configuration -->
     <spotbugs.version>4.8.6</spotbugs.version>
