@@ -1007,7 +1007,7 @@
             </revapi.differences>
             <revapi.versions>
               <enabled>true</enabled>
-              <strictSemver>false</strictSemver>
+              <strictSemver>true</strictSemver>
             </revapi.versions>
             <revapi.reporter.json>
               <minSeverity>NON_BREAKING</minSeverity>
