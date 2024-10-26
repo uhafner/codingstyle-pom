@@ -1,6 +1,7 @@
 
 [![GitHub Actions](https://github.com/uhafner/codingstyle-pom/workflows/GitHub%20CI/badge.svg)](https://github.com/uhafner/codingstyle-pom/actions)
 [![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](https://en.wikipedia.org/wiki/MIT_License)
+![JDK17](https://img.shields.io/badge/jdk-17-blue.svg)
 
 Each Java project should follow a given coding style. 
 I.e., all contributions to the source code should use the same formatting rules, design principles, code patterns, idioms, etc. 
