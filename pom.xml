@@ -64,8 +64,8 @@
 
     <pmd.skip>false</pmd.skip>
 
-    <codingstyle.config.version>5.0.0</codingstyle.config.version>
-    <codingstyle.library.version>5.0.0</codingstyle.library.version>
+    <codingstyle.config.version>5.1.0</codingstyle.config.version>
+    <codingstyle.library.version>5.1.0</codingstyle.library.version>
 
     <!-- Project Dependencies Configuration -->
     <spotbugs.version>4.8.6</spotbugs.version>
@@ -97,7 +97,7 @@
     <maven-failsafe-plugin.version>3.5.1</maven-failsafe-plugin.version>
     <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
     <maven-pmd-plugin.version>3.25.0</maven-pmd-plugin.version>
-    <pmd.version>7.6.0</pmd.version>
+    <pmd.version>7.7.0</pmd.version>
     <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
     <checkstyle.version>10.18.2</checkstyle.version>
     <spotbugs-maven-plugin.version>4.8.6.4</spotbugs-maven-plugin.version>
@@ -838,14 +838,14 @@
         </configuration>
         <dependencies>
           <dependency>
-            <groupId>net.sourceforge.pmd</groupId>
+            <groupId>edu.hm.hafner</groupId>
             <artifactId>pmd-core</artifactId>
-            <version>${pmd.version}</version>
+            <version>${pmd.version}-metrics</version>
           </dependency>
           <dependency>
-            <groupId>net.sourceforge.pmd</groupId>
+            <groupId>edu.hm.hafner</groupId>
             <artifactId>pmd-java</artifactId>
-            <version>${pmd.version}</version>
+            <version>${pmd.version}-metrics</version>
           </dependency>
           <dependency>
             <groupId>net.sourceforge.pmd</groupId>
@@ -916,8 +916,8 @@
               <includeTests>false</includeTests>
               <language>javascript</language>
               <compileSourceRoots>
-                <compileSourceRoot>${basedir}/src/main/resources</compileSourceRoot>
-                <compileSourceRoot>${basedir}/src/main/webapp/js</compileSourceRoot>
+                <compileSourceRoot>${project.basedir}/src/main/resources</compileSourceRoot>
+                <compileSourceRoot>${project.basedir}/src/main/webapp/js</compileSourceRoot>
               </compileSourceRoots>
               <includes>
                 <include>**/*.js</include>
@@ -925,29 +925,6 @@
               <skip>${pmd.skip}</skip>
             </configuration>
           </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-pmd-plugin</artifactId>
-        <configuration>
-          <linkXRef>false</linkXRef>
-          <targetJdk>${java.version}</targetJdk>
-          <skip>true</skip>
-        </configuration>
-        <dependencies>
-          <dependency>
-            <groupId>edu.hm.hafner</groupId>
-            <artifactId>pmd-core</artifactId>
-            <version>7.5.0-metrics</version>
-          </dependency>
-          <dependency>
-            <groupId>edu.hm.hafner</groupId>
-            <artifactId>pmd-java</artifactId>
-            <version>7.5.0-metrics</version>
-          </dependency>
-        </dependencies>
-        <executions>
           <execution>
             <id>run-pmd-metrics</id>
             <goals>
@@ -966,7 +943,6 @@
           </execution>
         </executions>
       </plugin>
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
