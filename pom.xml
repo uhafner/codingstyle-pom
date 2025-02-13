@@ -64,7 +64,7 @@
 
     <pmd.skip>false</pmd.skip>
 
-    <codingstyle.config.version>5.6.0</codingstyle.config.version>
+    <codingstyle.config.version>5.7.0</codingstyle.config.version>
     <codingstyle.library.version>${codingstyle.config.version}</codingstyle.library.version>
 
     <!-- Project Dependencies Configuration -->
