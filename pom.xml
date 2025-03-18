@@ -64,7 +64,7 @@
 
     <pmd.skip>false</pmd.skip>
 
-    <codingstyle.config.version>5.8.0</codingstyle.config.version>
+    <codingstyle.config.version>5.9.0</codingstyle.config.version>
     <codingstyle.library.version>${codingstyle.config.version}</codingstyle.library.version>
 
     <!-- Project Dependencies Configuration -->
@@ -1027,7 +1027,6 @@
         <artifactId>revapi-maven-plugin</artifactId>
         <configuration>
           <versionFormat>[-0-9.]*</versionFormat>
-          <failBuildOnProblemsFound>true</failBuildOnProblemsFound>
           <checkDependencies>true</checkDependencies>
           <failOnUnresolvedArtifacts>true</failOnUnresolvedArtifacts>
           <pipelineConfiguration>
@@ -1114,6 +1113,7 @@
         <pmd.failOnViolation>false</pmd.failOnViolation>
         <spotbugs.failOnError>false</spotbugs.failOnError>
         <gpg.skip>true</gpg.skip>
+        <revapi.failBuildOnProblemsFound>false</revapi.failBuildOnProblemsFound>
       </properties>
     </profile>
     <profile>
