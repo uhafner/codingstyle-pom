@@ -1027,7 +1027,6 @@
         <artifactId>revapi-maven-plugin</artifactId>
         <configuration>
           <versionFormat>[-0-9.]*</versionFormat>
-          <failBuildOnProblemsFound>true</failBuildOnProblemsFound>
           <checkDependencies>true</checkDependencies>
           <failOnUnresolvedArtifacts>true</failOnUnresolvedArtifacts>
           <pipelineConfiguration>
@@ -1114,6 +1113,7 @@
         <pmd.failOnViolation>false</pmd.failOnViolation>
         <spotbugs.failOnError>false</spotbugs.failOnError>
         <gpg.skip>true</gpg.skip>
+        <revapi.failBuildOnProblemsFound>false</revapi.failBuildOnProblemsFound>
       </properties>
     </profile>
     <profile>
