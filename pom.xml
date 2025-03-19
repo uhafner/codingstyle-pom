@@ -1042,6 +1042,15 @@
               <attachments>
                 <vetted>ok</vetted>
               </attachments>
+              <differences>
+                <item>
+                  <ignore>true</ignore>
+                  <regex>true</regex>
+                  <code>java.annotation.removed</code>
+                  <annotation>@edu.umd.cs.findbugs.annotations.SuppressFBWarnings.*</annotation>
+                  <justification>Not used yet</justification>
+                </item>
+              </differences>
             </revapi.differences>
             <revapi.versions>
               <enabled>true</enabled>
