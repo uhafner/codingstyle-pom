@@ -80,7 +80,7 @@
     <equalsverifier.version>3.19.3</equalsverifier.version>
     <junit.version>5.12.1</junit.version>
     <junit-pioneer.version>2.3.0</junit-pioneer.version>
-    <mockito.version>5.16.1</mockito.version>
+    <mockito.version>5.17.0</mockito.version>
     <assertj.version>3.27.3</assertj.version>
     <archunit.version>1.4.0</archunit.version>
 
