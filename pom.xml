@@ -44,7 +44,6 @@
     <tag>HEAD</tag>
     <url>https://github.com/uhafner/codingstyle-pom</url>
   </scm>
-  >
 
   <properties>
     <source.encoding>UTF-8</source.encoding>
