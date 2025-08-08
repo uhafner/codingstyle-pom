@@ -71,7 +71,7 @@
     <junit.version>5.13.4</junit.version>
     <junit-pioneer.version>2.3.0</junit-pioneer.version>
     <mockito.version>5.18.0</mockito.version>
-    <assertj.version>3.27.3</assertj.version>
+    <assertj.version>3.27.4</assertj.version>
     <archunit.version>1.4.1</archunit.version>
 
     <!-- Maven Plug-ins Configuration -->
