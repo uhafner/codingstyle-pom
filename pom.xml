@@ -115,7 +115,7 @@
     <versions-maven-plugin.version>2.18.0</versions-maven-plugin.version>
 
     <!-- OpenRewrite versions   -->
-    <rewrite-maven-plugin.version>6.15.0</rewrite-maven-plugin.version>
+    <rewrite-maven-plugin.version>6.16.0</rewrite-maven-plugin.version>
     <rewrite-testing-frameworks.version>3.14.1</rewrite-testing-frameworks.version>
     <rewrite-static-analysis.version>2.14.0</rewrite-static-analysis.version>
     <rewrite-migrate-java.version>3.15.0</rewrite-migrate-java.version>
