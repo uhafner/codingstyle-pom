@@ -302,7 +302,7 @@
         <plugin>
           <groupId>com.github.ekryd.sortpom</groupId>
           <artifactId>sortpom-maven-plugin</artifactId>
-          <version>${  sortpom-maven-plugin.version}</version>
+          <version>${sortpom-maven-plugin.version}</version>
           <configuration>
             <expandEmptyElements>false</expandEmptyElements>
             <spaceBeforeCloseEmptyElement>true</spaceBeforeCloseEmptyElement>
