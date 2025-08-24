@@ -54,7 +54,7 @@
 
     <pmd.skip>false</pmd.skip>
 
-    <codingstyle.config.version>5.15.0</codingstyle.config.version>
+    <codingstyle.config.version>5.17.0</codingstyle.config.version>
     <codingstyle.library.version>${codingstyle.config.version}</codingstyle.library.version>
 
     <!-- Project Dependencies Configuration -->
@@ -419,7 +419,7 @@
               <goals>
                 <goal>test</goal>
               </goals>
-              <id>unit-tests</id>
+              <id>default-test</id>
               <phase>test</phase>
               <configuration>
                 <excludes>
@@ -431,7 +431,7 @@
               <goals>
                 <goal>test</goal>
               </goals>
-              <id>architecture-tests</id>
+              <id>architecture-test</id>
               <phase>test</phase>
               <configuration>
                 <includes>
