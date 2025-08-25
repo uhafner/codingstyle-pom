@@ -4,7 +4,7 @@
 
   <groupId>edu.hm.hafner</groupId>
   <artifactId>codingstyle-pom</artifactId>
-  <version>5.29.0-SNAPSHOT</version>
+  <version>5.28.2-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Java coding style POM</name>
@@ -572,7 +572,7 @@
             <id>default-test</id>
             <phase>test</phase>
             <configuration>
-              <excludes>
+              <excludes combine.children="append">
                 <exclude>**/archunit/**</exclude>
               </excludes>
             </configuration>
