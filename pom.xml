@@ -421,6 +421,7 @@
               <objectAssertion>has_assertion_template.txt</objectAssertion>
               <assertionClass>assertion_class_template.txt</assertionClass>
               <realNumberWrapperAssertion>has_assertion_template_for_real_number_wrapper.txt</realNumberWrapperAssertion>
+              <wholeNumberWrapperAssertion>has_assertion_template_for_primitive_wrapper.txt</wholeNumberWrapperAssertion>
             </templates>
           </configuration>
           <dependencies>
