@@ -58,7 +58,7 @@
     <codingstyle.library.version>${codingstyle.config.version}</codingstyle.library.version>
 
     <!-- Project Dependencies Configuration -->
-    <spotbugs.version>4.9.6</spotbugs.version>
+    <spotbugs.version>4.9.8</spotbugs.version>
     <commons.lang.version>3.19.0</commons.lang.version>
     <commons.io.version>2.20.0</commons.io.version>
     <byte-buddy.version>1.17.8</byte-buddy.version>
