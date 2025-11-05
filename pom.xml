@@ -49,6 +49,7 @@
     <source.encoding>UTF-8</source.encoding>
     <project.build.sourceEncoding>${source.encoding}</project.build.sourceEncoding>
     <java.version>17</java.version>
+    <java.build.version>21</java.build.version>
 
     <module.name>undefined</module.name>
 
@@ -835,7 +836,7 @@
             <configuration>
               <rules>
                 <requireJavaVersion>
-                  <version>${java.version}</version>
+                  <version>${java.build.version}</version>
                 </requireJavaVersion>
               </rules>
             </configuration>
