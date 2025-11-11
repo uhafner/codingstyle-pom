@@ -726,6 +726,7 @@
             <arg>-J-Duser.language=en</arg>
             <arg>-Xlint:all</arg>
             <arg>-Xlint:-exports</arg>
+            <arg>-Xlint:-path</arg>
             <arg>-Xlint:-missing-explicit-ctor</arg>
             <arg>-Xlint:-requires-transitive-automatic</arg>
             <arg>-Xlint:-requires-automatic</arg>
