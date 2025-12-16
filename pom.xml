@@ -388,6 +388,8 @@
             <releaseProfiles>release</releaseProfiles>
             <goals>deploy</goals>
             <tagNameFormat>v@{project.version}</tagNameFormat>
+            <scmDevelopmentCommitComment>@{prefix} Prepare for next development iteration [skip ci]</scmDevelopmentCommitComment>
+            <scmReleaseCommitComment>@{prefix} Prepare release [skip ci]</scmReleaseCommitComment>
           </configuration>
         </plugin>
         <plugin>
