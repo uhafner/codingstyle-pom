@@ -528,7 +528,7 @@
               <param>*toString</param>
             </excludedMethods>
             <features>
-              <feature>+FCSV(csvFile[etc/pitmute.csv])</feature>
+              <feature>+FCSV(csvFile[etc/pitmute.csv]) allowMissingFile[true])</feature>
             </features>
           </configuration>
           <dependencies>
