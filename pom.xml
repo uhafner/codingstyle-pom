@@ -4,7 +4,7 @@
 
   <groupId>edu.hm.hafner</groupId>
   <artifactId>codingstyle-pom</artifactId>
-  <version>6.3.0</version>
+  <version>6.4.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Java coding style POM</name>
@@ -41,7 +41,7 @@
   <scm>
     <connection>scm:git:https://github.com/uhafner/codingstyle-pom.git</connection>
     <developerConnection>scm:git:git@github.com:uhafner/codingstyle-pom.git</developerConnection>
-    <tag>v6.3.0</tag>
+    <tag>HEAD</tag>
     <url>https://github.com/uhafner/codingstyle-pom</url>
   </scm>
 
