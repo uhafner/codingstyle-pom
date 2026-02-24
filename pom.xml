@@ -530,6 +530,7 @@
             </excludedMethods>
             <features>
               <feature>+FCSV(csvFile[etc/pitmute.csv] allowMissingFile[true])</feature>
+              <feature>+FANNOT</feature>
             </features>
           </configuration>
           <dependencies>
