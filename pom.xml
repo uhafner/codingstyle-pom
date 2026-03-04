@@ -473,6 +473,7 @@
               <recipe>org.openrewrite.staticanalysis.CommonStaticAnalysis</recipe>
               <recipe>org.openrewrite.staticanalysis.MissingOverrideAnnotation</recipe>
               <recipe>org.openrewrite.staticanalysis.RemoveExtraSemicolons</recipe>
+              <recipe>org.openrewrite.staticanalysis.SimplifyTernaryRecipes</recipe>
               <recipe>org.openrewrite.java.migrate.UpgradeToJava21</recipe>
               <recipe>org.openrewrite.java.migrate.util.JavaUtilAPIs</recipe>
               <recipe>org.openrewrite.java.migrate.util.SequencedCollection</recipe>
