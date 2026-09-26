@@ -4,7 +4,7 @@
 
   <groupId>edu.hm.hafner</groupId>
   <artifactId>codingstyle-pom</artifactId>
-  <version>6.19.0-SNAPSHOT</version>
+  <version>7.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Java coding style POM</name>
@@ -55,7 +55,7 @@
 
     <pmd.skip>false</pmd.skip>
 
-    <codingstyle.config.version>6.18.0</codingstyle.config.version>
+    <codingstyle.config.version>7.0.0</codingstyle.config.version>
     <codingstyle.library.version>${codingstyle.config.version}</codingstyle.library.version>
 
     <!-- Project Dependencies Configuration -->
@@ -115,6 +115,7 @@
     <dependency-check-maven.version>13.0.0</dependency-check-maven.version>
     <build-helper-maven-plugin.version>3.6.2</build-helper-maven-plugin.version>
     <versions-maven-plugin.version>2.22.0</versions-maven-plugin.version>
+    <spotless-maven-plugin.version>3.10.2</spotless-maven-plugin.version>
 
     <!-- OpenRewrite versions   -->
     <rewrite-maven-plugin.version>6.46.1</rewrite-maven-plugin.version>
@@ -126,22 +127,6 @@
 
   <dependencyManagement>
     <dependencies>
-      <!-- Production Dependencies -->
-      <dependency>
-        <groupId>net.bytebuddy</groupId>
-        <artifactId>byte-buddy</artifactId>
-        <version>${byte-buddy.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-api</artifactId>
-        <version>${slf4j.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>commons-logging</groupId>
-        <artifactId>commons-logging</artifactId>
-        <version>${commons-logging.version}</version>
-      </dependency>
 
       <!-- Test Dependencies -->
       <dependency>
@@ -158,33 +143,26 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <dependency>
+        <groupId>commons-logging</groupId>
+        <artifactId>commons-logging</artifactId>
+        <version>${commons-logging.version}</version>
+      </dependency>
+      <!-- Production Dependencies -->
+      <dependency>
+        <groupId>net.bytebuddy</groupId>
+        <artifactId>byte-buddy</artifactId>
+        <version>${byte-buddy.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${slf4j.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
   <dependencies>
-    <dependency>
-      <groupId>edu.hm.hafner</groupId>
-      <artifactId>codingstyle</artifactId>
-      <version>${codingstyle.library.version}</version>
-      <exclusions>
-        <exclusion>
-          <groupId>com.google.errorprone</groupId>
-          <artifactId>error_prone_annotations</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.commons</groupId>
-          <artifactId>commons-lang3</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>commons-io</groupId>
-          <artifactId>commons-io</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>com.github.spotbugs</groupId>
-          <artifactId>spotbugs-annotations</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
     <dependency>
       <groupId>com.github.spotbugs</groupId>
       <artifactId>spotbugs-annotations</artifactId>
@@ -196,19 +174,83 @@
       <version>${error-prone.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-lang3</artifactId>
-      <version>${commons.lang.version}</version>
-    </dependency>
-    <dependency>
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
       <version>${commons.io.version}</version>
     </dependency>
     <dependency>
+      <groupId>edu.hm.hafner</groupId>
+      <artifactId>codingstyle</artifactId>
+      <version>${codingstyle.library.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>com.github.spotbugs</groupId>
+          <artifactId>spotbugs-annotations</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.google.errorprone</groupId>
+          <artifactId>error_prone_annotations</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>commons-io</groupId>
+          <artifactId>commons-io</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.apache.commons</groupId>
+          <artifactId>commons-lang3</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
       <groupId>one.util</groupId>
       <artifactId>streamex</artifactId>
       <version>${streamex.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>${commons.lang.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.tngtech.archunit</groupId>
+      <artifactId>archunit-junit5</artifactId>
+      <version>${archunit.version}</version>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.junit.platform</groupId>
+          <artifactId>junit-platform-engine</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-api</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>edu.hm.hafner</groupId>
+      <artifactId>codingstyle</artifactId>
+      <version>${codingstyle.library.version}</version>
+      <type>test-jar</type>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>com.github.spotbugs</groupId>
+          <artifactId>spotbugs-annotations</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.google.errorprone</groupId>
+          <artifactId>error_prone_annotations</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>commons-io</groupId>
+          <artifactId>commons-io</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.apache.commons</groupId>
+          <artifactId>commons-lang3</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <!-- Test Dependencies -->
@@ -219,8 +261,9 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter</artifactId>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>${assertj.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -230,31 +273,14 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.assertj</groupId>
-      <artifactId>assertj-core</artifactId>
-      <version>${assertj.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.tngtech.archunit</groupId>
-      <artifactId>archunit-junit5</artifactId>
-      <version>${archunit.version}</version>
-      <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>org.slf4j</groupId>
-          <artifactId>slf4j-api</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.junit.platform</groupId>
-          <artifactId>junit-platform-engine</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -262,49 +288,11 @@
       <version>${slf4j.version}</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>edu.hm.hafner</groupId>
-      <artifactId>codingstyle</artifactId>
-      <version>${codingstyle.library.version}</version>
-      <type>test-jar</type>
-      <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>com.google.errorprone</groupId>
-          <artifactId>error_prone_annotations</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.commons</groupId>
-          <artifactId>commons-lang3</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>commons-io</groupId>
-          <artifactId>commons-io</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>com.github.spotbugs</groupId>
-          <artifactId>spotbugs-annotations</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
   </dependencies>
 
   <build>
     <pluginManagement>
       <plugins>
-        <plugin>
-          <groupId>com.github.ekryd.sortpom</groupId>
-          <artifactId>sortpom-maven-plugin</artifactId>
-          <version>${sortpom-maven-plugin.version}</version>
-          <configuration>
-            <expandEmptyElements>false</expandEmptyElements>
-            <spaceBeforeCloseEmptyElement>true</spaceBeforeCloseEmptyElement>
-            <createBackupFile>false</createBackupFile>
-            <sortPlugins>groupId,artifactId</sortPlugins>
-            <sortExecutions>true</sortExecutions>
-            <sortDependencyExclusions>groupId,artifactId</sortDependencyExclusions>
-          </configuration>
-        </plugin>
         <plugin>
           <groupId>com.github.ferstl</groupId>
           <artifactId>depgraph-maven-plugin</artifactId>
@@ -490,8 +478,13 @@
           <dependencies>
             <dependency>
               <groupId>org.openrewrite.recipe</groupId>
-              <artifactId>rewrite-testing-frameworks</artifactId>
-              <version>${rewrite-testing-frameworks.version}</version>
+              <artifactId>rewrite-migrate-java</artifactId>
+              <version>${rewrite-migrate-java.version}</version>
+            </dependency>
+            <dependency>
+              <groupId>org.openrewrite.recipe</groupId>
+              <artifactId>rewrite-recommendations</artifactId>
+              <version>${rewrite-recommendations.version}</version>
             </dependency>
             <dependency>
               <groupId>org.openrewrite.recipe</groupId>
@@ -500,13 +493,8 @@
             </dependency>
             <dependency>
               <groupId>org.openrewrite.recipe</groupId>
-              <artifactId>rewrite-migrate-java</artifactId>
-              <version>${rewrite-migrate-java.version}</version>
-            </dependency>
-            <dependency>
-              <groupId>org.openrewrite.recipe</groupId>
-              <artifactId>rewrite-recommendations</artifactId>
-              <version>${rewrite-recommendations.version}</version>
+              <artifactId>rewrite-testing-frameworks</artifactId>
+              <version>${rewrite-testing-frameworks.version}</version>
             </dependency>
           </dependencies>
         </plugin>
@@ -536,14 +524,14 @@
           </configuration>
           <dependencies>
             <dependency>
-              <groupId>org.pitest</groupId>
-              <artifactId>pitest-junit5-plugin</artifactId>
-              <version>${pitest-junit5-plugin.version}</version>
-            </dependency>
-            <dependency>
               <groupId>edu.hm.hafner</groupId>
               <artifactId>pitmute</artifactId>
               <version>${pitmute.version}</version>
+            </dependency>
+            <dependency>
+              <groupId>org.pitest</groupId>
+              <artifactId>pitest-junit5-plugin</artifactId>
+              <version>${pitest-junit5-plugin.version}</version>
             </dependency>
           </dependencies>
         </plugin>
@@ -562,9 +550,118 @@
             <autoPublish>true</autoPublish>
           </configuration>
         </plugin>
+        <plugin>
+          <groupId>com.diffplug.spotless</groupId>
+          <artifactId>spotless-maven-plugin</artifactId>
+          <version>${spotless-maven-plugin.version}</version>
+          <configuration>
+            <asciidoc>
+              <includes>
+                <include>**/*.adoc</include>
+              </includes>
+              <excludes>
+                <exclude>target/**</exclude>
+                <exclude>docker/volumes/**</exclude>
+                <exclude>src/test/resources/**</exclude>
+              </excludes>
+              <adocfmt>
+                <normalizeListBullets>true</normalizeListBullets>
+              </adocfmt>
+            </asciidoc>
+            <java>
+              <excludes>
+                <exclude>target/**</exclude>
+                <exclude>docker/volumes/**</exclude>
+                <exclude>src/test/resources/**</exclude>
+              </excludes>
+              <endWithNewline />
+              <importOrder />
+              <indent>
+                <spaces>true</spaces>
+              </indent>
+              <palantirJavaFormat>
+                <formatJavadoc>true</formatJavadoc>
+              </palantirJavaFormat>
+              <shortenFullyQualifiedTypes />
+              <removeUnusedImports />
+              <toggleOffOn />
+              <trimTrailingWhitespace />
+            </java>
+            <json>
+              <includes>
+                <include>**/*.json</include>
+              </includes>
+              <excludes>
+                <exclude>target/**</exclude>
+                <exclude>docker/volumes/**</exclude>
+                <exclude>src/test/resources/**</exclude>
+              </excludes>
+              <jackson />
+            </json>
+            <markdown>
+              <includes>
+                <include>**/*.md</include>
+              </includes>
+              <excludes>
+                <exclude>target/**</exclude>
+                <exclude>docker/volumes/**</exclude>
+                <exclude>src/test/resources/**</exclude>
+              </excludes>
+              <flexmark />
+            </markdown>
+            <pom>
+              <sortPom>
+                <expandEmptyElements>false</expandEmptyElements>
+                <sortDependencies>scope,groupId,artifactId</sortDependencies>
+                <sortDependencyExclusions>groupId,artifactId</sortDependencyExclusions>
+                <spaceBeforeCloseEmptyElement>true</spaceBeforeCloseEmptyElement>
+              </sortPom>
+            </pom>
+            <typescript>
+              <includes>
+                <include>**/*.js</include>
+              </includes>
+              <excludes>
+                <exclude>target/**</exclude>
+                <exclude>docker/volumes/**</exclude>
+                <exclude>src/test/resources/**</exclude>
+              </excludes>
+              <prettier />
+            </typescript>
+            <yaml>
+              <includes>
+                <include>**/*.yaml</include>
+              </includes>
+              <excludes>
+                <exclude>target/**</exclude>
+                <exclude>docker/volumes/**</exclude>
+                <exclude>src/test/resources/**</exclude>
+              </excludes>
+            </yaml>
+          </configuration>
+          <executions>
+            <execution>
+              <goals>
+                <goal>check</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
+      <plugin>
+        <groupId>com.diffplug.spotless</groupId>
+        <artifactId>spotless-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
@@ -579,10 +676,10 @@
         </configuration>
         <executions>
           <execution>
+            <id>default-test</id>
             <goals>
               <goal>test</goal>
             </goals>
-            <id>default-test</id>
             <phase>test</phase>
             <configuration>
               <excludes combine.children="append">
@@ -591,10 +688,10 @@
             </configuration>
           </execution>
           <execution>
+            <id>architecture-test</id>
             <goals>
               <goal>test</goal>
             </goals>
-            <id>architecture-test</id>
             <phase>test</phase>
             <configuration>
               <includes>
@@ -626,15 +723,15 @@
         </configuration>
         <dependencies>
           <dependency>
+            <groupId>com.github.spotbugs</groupId>
+            <artifactId>spotbugs</artifactId>
+            <version>${spotbugs.version}</version>
+          </dependency>
+          <dependency>
             <groupId>edu.hm.hafner</groupId>
             <artifactId>codingstyle</artifactId>
             <version>${codingstyle.config.version}</version>
             <classifier>config</classifier>
-          </dependency>
-          <dependency>
-            <groupId>com.github.spotbugs</groupId>
-            <artifactId>spotbugs</artifactId>
-            <version>${spotbugs.version}</version>
           </dependency>
         </dependencies>
         <executions>
@@ -910,6 +1007,12 @@
         <dependencies>
           <dependency>
             <groupId>edu.hm.hafner</groupId>
+            <artifactId>codingstyle</artifactId>
+            <version>${codingstyle.config.version}</version>
+            <classifier>config</classifier>
+          </dependency>
+          <dependency>
+            <groupId>edu.hm.hafner</groupId>
             <artifactId>pmd-core</artifactId>
             <version>${pmd.metrics.version}</version>
           </dependency>
@@ -922,12 +1025,6 @@
             <groupId>net.sourceforge.pmd</groupId>
             <artifactId>pmd-javascript</artifactId>
             <version>${pmd.version}</version>
-          </dependency>
-          <dependency>
-            <groupId>edu.hm.hafner</groupId>
-            <artifactId>codingstyle</artifactId>
-            <version>${codingstyle.config.version}</version>
-            <classifier>config</classifier>
           </dependency>
         </dependencies>
         <executions>
