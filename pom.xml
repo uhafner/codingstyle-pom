@@ -1339,6 +1339,9 @@
     </profile>
     <profile>
       <id>release</id>
+      <properties>
+        <spotless.check.skip>true</spotless.check.skip>
+      </properties>
       <build>
         <plugins>
           <plugin>
